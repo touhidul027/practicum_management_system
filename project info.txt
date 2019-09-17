@@ -42,7 +42,10 @@ dept. administrator
 	4.1 click on change supervisor
 	4.2 search by student id,input student id
 	4.3 Ajax call will be called
-		4.3.1 https://www.mkyong.com/spring-mvc/spring-4-mvc-ajax-hello-world-example/
+		4.3.1 https://www.technicalkeeda.com/spring-tutorials/spring-framework-jquery-ajax-request-and-json-response-example
+		4.3.2 Help took from the above example
+	4.4 Possible supervisors list will be populated depending on the current supervisor
+		4.4.1 supervisor id is hardcoded in ajax call
 		
 
 

@@ -8,4 +8,6 @@ public interface SupervisorRepository {
 	public List<Supervisor> getSupervisors();
 
 	public Supervisor getSupervisor(int id);
+
+	public Supervisor getSupervisorByUserName(String supervisorUserName);
 }

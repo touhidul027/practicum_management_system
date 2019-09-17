@@ -25,4 +25,21 @@ public class SupervisorServiceImpl implements SupervisorService{
 		return supervisorRepository.getSupervisor(id);
 	}
 
+	@Override
+	public List<Supervisor> getSupervisorsExcept(int supervisorId) {
+		List<Supervisor> supervisors = getSupervisors() ; 
+		for(Supervisor supervisor : supervisors) {
+			if(supervisor.getSupervisorId() == supervisorId) {
+				supervisors.remove(supervisor);
+				break ; 
+			}
+		}
+		return supervisors;
+	}
+
+	@Override
+	public Supervisor getSupervisorByUserName(String supervisorUserName) {	
+		return supervisorRepository.getSupervisorByUserName(supervisorUserName);
+	}
+
 }

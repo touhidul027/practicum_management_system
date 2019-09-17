@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
@@ -28,7 +29,6 @@ public class StudentRepositoryImpl implements StudentRepository {
 		param.put("id", id);
 		Student student = (Student) jdbcTemplate.queryForObject("SELECT * FROM students WHERE id=:id", param,
 				new StudentMapper());
-		System.out.println(student.toString());
 		return student;
 	}
 

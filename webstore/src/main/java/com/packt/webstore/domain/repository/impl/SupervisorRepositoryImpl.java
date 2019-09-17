@@ -46,4 +46,16 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 				.queryForObject("SELECT * FROM supervisors WHERE supervisor_id=:id", param, new SupervisorRowMapper());
 		return supervisor;
 	}
+
+	@Override
+	public Supervisor getSupervisorByUserName(String supervisorUserName) {
+		
+		System.out.println(SupervisorRepositoryImpl.class + " " + supervisorUserName);
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("supervisorUserName", supervisorUserName);
+		Supervisor supervisor = (Supervisor) jdbcTemplate
+				.queryForObject("SELECT * FROM supervisors WHERE user_name=:supervisorUserName", param, new SupervisorRowMapper());
+		return supervisor;
+	}
 }

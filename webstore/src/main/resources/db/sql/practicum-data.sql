@@ -4,4 +4,7 @@ INSERT INTO students VALUES
 
 INSERT INTO supervisors VALUES 
 	(9990101, 'safwana haque'),
-	(9990102, 'homayon');
+	(9990102, 'Arifa tur rahman'),
+	(9990103, 'Krishna Das'),
+	(9990104, 'Shaheen Alam'),
+	(9990105, 'homayon kabir');
