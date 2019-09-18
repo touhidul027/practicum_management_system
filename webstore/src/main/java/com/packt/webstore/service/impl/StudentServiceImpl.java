@@ -6,15 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.packt.webstore.domain.Student;
+import com.packt.webstore.domain.Supervisor;
 import com.packt.webstore.domain.repository.StudentRepository;
 import com.packt.webstore.service.StudentService;
 
 @Service
-public class StudentServiceImpl implements StudentService{
-	
+public class StudentServiceImpl implements StudentService {
+
 	@Autowired
 	private StudentRepository studentRepository;
-	
+
 	@Override
 	public Student getStudentById(int id) {
 		return studentRepository.getStudent(id);
@@ -23,6 +24,12 @@ public class StudentServiceImpl implements StudentService{
 	@Override
 	public List<Student> getStudents() {
 		return studentRepository.getStudents();
+	}
+
+	@Override
+	public Supervisor getStudentSupervisor(int studentId) {
+		
+		return studentRepository.getStudentSupervisor(studentId);
 	}
 
 }

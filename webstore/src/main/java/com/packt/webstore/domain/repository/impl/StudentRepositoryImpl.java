@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.domain.Student;
+import com.packt.webstore.domain.Supervisor;
 import com.packt.webstore.domain.repository.StudentRepository;
 
 @Repository
@@ -49,6 +50,12 @@ public class StudentRepositoryImpl implements StudentRepository {
 			student.setSupervisor(rs.getString("supervisor"));
 			return student;
 		}
+	}
+
+	@Override
+	public Supervisor getStudentSupervisor(int studentId) {
+		// fetch data from database
+		return new Supervisor(9990101, "Safwana Haque");
 	}
 
 }

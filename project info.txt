@@ -44,10 +44,16 @@ dept. administrator
 	4.3 Ajax call will be called
 		4.3.1 https://www.technicalkeeda.com/spring-tutorials/spring-framework-jquery-ajax-request-and-json-response-example
 		4.3.2 Help took from the above example
-	4.4 Possible supervisors list will be populated depending on the current supervisor
-		4.4.1 supervisor id is hardcoded in ajax call
-		
-
+	4.4 Create a ChangeSupervisorDTO
+		4.4.1 DTO will contain studentId,name,supervisorId,supervisor name,List of 
+		      available supervisor along with their id,name
+	4.5 Create AdminRestController if not existed
+	4.6 Create AdminService if not existed
+	4.7 Create AdminRepository if not existed
+	4.8 for @autowired purpose ,create service and repository bean
+	4.9 AdminService is may use other service or repository
+	4.10 return value as map in ajax client and append it to the select options
+	4.11 Done
 
 
 

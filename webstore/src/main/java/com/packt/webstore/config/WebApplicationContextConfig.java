@@ -35,14 +35,18 @@ import org.springframework.web.servlet.view.xml.MarshallingView;
 import org.springframework.web.util.UrlPathHelper;
 
 import com.packt.webstore.domain.Product;
+import com.packt.webstore.domain.repository.AdminRepository;
 import com.packt.webstore.domain.repository.StudentRepository;
 import com.packt.webstore.domain.repository.SupervisorRepository;
+import com.packt.webstore.domain.repository.impl.AdminRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.StudentRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.SupervisorRepositoryImpl;
 import com.packt.webstore.interceptor.ProcessingTimeLogInterceptor;
 import com.packt.webstore.interceptor.PromoCodeInterceptor;
+import com.packt.webstore.service.AdminService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
+import com.packt.webstore.service.impl.AdminServiceImpl;
 import com.packt.webstore.service.impl.StudentServiceImpl;
 import com.packt.webstore.service.impl.SupervisorServiceImpl;
 import com.packt.webstore.validator.ProductValidator;
@@ -53,152 +57,158 @@ import com.packt.webstore.validator.UnitsInStockValidator;
 @ComponentScan("com.packt.webstore")
 public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 
-     @Override
-    public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
-        configurer.enable();
-    }
- 
-    @Bean
-    public InternalResourceViewResolver getInternalResourceViewResolver() {
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setViewClass(JstlView.class);
-        resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".jsp");
+	@Override
+	public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
+		configurer.enable();
+	}
 
-        return resolver;
-    }
-    
-    @Override
-    public void configurePathMatch(PathMatchConfigurer configurer) {
-       UrlPathHelper urlPathHelper = new UrlPathHelper();
-       urlPathHelper.setRemoveSemicolonContent(false);
+	@Bean
+	public InternalResourceViewResolver getInternalResourceViewResolver() {
+		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+		resolver.setViewClass(JstlView.class);
+		resolver.setPrefix("/WEB-INF/views/");
+		resolver.setSuffix(".jsp");
 
-       configurer.setUrlPathHelper(urlPathHelper);
-    }
-    
-    @Bean
-    public MessageSource messageSource() { 
-       ResourceBundleMessageSource resource = new ResourceBundleMessageSource();
-       resource.setBasename("messages");
-       return resource;    
-    }
-    
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-       registry.addResourceHandler("/img/**")
-              .addResourceLocations("/resources/images/");
-    }
-    
-    @Bean
-    public CommonsMultipartResolver multipartResolver() {
-        CommonsMultipartResolver resolver=new CommonsMultipartResolver();
-        resolver.setDefaultEncoding("utf-8");
-        return resolver;
-    }
-    
-    @Bean
-    public MappingJackson2JsonView jsonView() {
-       MappingJackson2JsonView jsonView = new MappingJackson2JsonView();
-       jsonView.setPrettyPrint(true);
-       
-       return jsonView; 
-    }
-    
-    @Bean
-    public MarshallingView xmlView() {
-       Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-       marshaller.setClassesToBeBound(Product.class);
-       
-       MarshallingView xmlView = new MarshallingView(marshaller);
-       return xmlView;
-    }
-    
-    @Bean
-    public ViewResolver contentNegotiatingViewResolver(
-             ContentNegotiationManager manager) {
-       ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
-       resolver.setContentNegotiationManager(manager);
-          
-       ArrayList<View>   views = new ArrayList<>();
-       views.add(jsonView());
-       views.add(xmlView());
-          
-       resolver.setDefaultViews(views);
-             
-       return resolver;
-    }
+		return resolver;
+	}
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {      
-        registry.addInterceptor(new ProcessingTimeLogInterceptor());
-        
-        LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
-        localeChangeInterceptor.setParamName("language");
-        registry.addInterceptor(localeChangeInterceptor);
-        
-        registry.addInterceptor(promoCodeInterceptor())
-        .addPathPatterns("/**/market/products/specialOffer");
-    }
-    
-    @Bean
-    public LocaleResolver localeResolver(){
-       SessionLocaleResolver resolver = new SessionLocaleResolver();
-       resolver.setDefaultLocale(new Locale("en"));
-       
-       return resolver;
-    }
-    
-    @Bean
-    public HandlerInterceptor promoCodeInterceptor() {
-       PromoCodeInterceptor promoCodeInterceptor = new PromoCodeInterceptor();
-       promoCodeInterceptor.setPromoCode("OFF3R");
-       promoCodeInterceptor.setOfferRedirect("market/products");
-       promoCodeInterceptor.setErrorRedirect("invalidPromoCode");
-       
-       return promoCodeInterceptor;
-    }
-    
-    @Bean(name = "validator")
-    public LocalValidatorFactoryBean validator() {
-       LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
-       bean.setValidationMessageSource(messageSource());
-       return bean;
-    }
-    
-    @Override
-    public Validator getValidator(){
-       return validator();
-    }
-    
-    @Bean
-    public ProductValidator productValidator () {
-       Set<Validator> springValidators = new HashSet<>();
-       springValidators.add(new UnitsInStockValidator());
-       
-       ProductValidator productValidator = new ProductValidator();
-       productValidator.setSpringValidators(springValidators);
-       
-       return productValidator;
-    }
-    
-    @Bean
-    public StudentService studentService () {     
-       return new StudentServiceImpl();
-    }
+	@Override
+	public void configurePathMatch(PathMatchConfigurer configurer) {
+		UrlPathHelper urlPathHelper = new UrlPathHelper();
+		urlPathHelper.setRemoveSemicolonContent(false);
 
-    @Bean
-    public StudentRepository studentRepository() {
-    	return new StudentRepositoryImpl();
-    }
-    
-    @Bean
-    public SupervisorService supervisorService () {     
-       return new SupervisorServiceImpl();
-    }
-    
-    @Bean
-    public SupervisorRepository supervisorRepository () {     
-       return new SupervisorRepositoryImpl();
-    }
-    
+		configurer.setUrlPathHelper(urlPathHelper);
+	}
+
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource resource = new ResourceBundleMessageSource();
+		resource.setBasename("messages");
+		return resource;
+	}
+
+	@Override
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/img/**").addResourceLocations("/resources/images/");
+	}
+
+	@Bean
+	public CommonsMultipartResolver multipartResolver() {
+		CommonsMultipartResolver resolver = new CommonsMultipartResolver();
+		resolver.setDefaultEncoding("utf-8");
+		return resolver;
+	}
+
+	@Bean
+	public MappingJackson2JsonView jsonView() {
+		MappingJackson2JsonView jsonView = new MappingJackson2JsonView();
+		jsonView.setPrettyPrint(true);
+
+		return jsonView;
+	}
+
+	@Bean
+	public MarshallingView xmlView() {
+		Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
+		marshaller.setClassesToBeBound(Product.class);
+
+		MarshallingView xmlView = new MarshallingView(marshaller);
+		return xmlView;
+	}
+
+	@Bean
+	public ViewResolver contentNegotiatingViewResolver(ContentNegotiationManager manager) {
+		ContentNegotiatingViewResolver resolver = new ContentNegotiatingViewResolver();
+		resolver.setContentNegotiationManager(manager);
+
+		ArrayList<View> views = new ArrayList<>();
+		views.add(jsonView());
+		views.add(xmlView());
+
+		resolver.setDefaultViews(views);
+
+		return resolver;
+	}
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new ProcessingTimeLogInterceptor());
+
+		LocaleChangeInterceptor localeChangeInterceptor = new LocaleChangeInterceptor();
+		localeChangeInterceptor.setParamName("language");
+		registry.addInterceptor(localeChangeInterceptor);
+
+		registry.addInterceptor(promoCodeInterceptor()).addPathPatterns("/**/market/products/specialOffer");
+	}
+
+	@Bean
+	public LocaleResolver localeResolver() {
+		SessionLocaleResolver resolver = new SessionLocaleResolver();
+		resolver.setDefaultLocale(new Locale("en"));
+
+		return resolver;
+	}
+
+	@Bean
+	public HandlerInterceptor promoCodeInterceptor() {
+		PromoCodeInterceptor promoCodeInterceptor = new PromoCodeInterceptor();
+		promoCodeInterceptor.setPromoCode("OFF3R");
+		promoCodeInterceptor.setOfferRedirect("market/products");
+		promoCodeInterceptor.setErrorRedirect("invalidPromoCode");
+
+		return promoCodeInterceptor;
+	}
+
+	@Bean(name = "validator")
+	public LocalValidatorFactoryBean validator() {
+		LocalValidatorFactoryBean bean = new LocalValidatorFactoryBean();
+		bean.setValidationMessageSource(messageSource());
+		return bean;
+	}
+
+	@Override
+	public Validator getValidator() {
+		return validator();
+	}
+
+	@Bean
+	public ProductValidator productValidator() {
+		Set<Validator> springValidators = new HashSet<>();
+		springValidators.add(new UnitsInStockValidator());
+
+		ProductValidator productValidator = new ProductValidator();
+		productValidator.setSpringValidators(springValidators);
+
+		return productValidator;
+	}
+
+	@Bean
+	public StudentService studentService() {
+		return new StudentServiceImpl();
+	}
+
+	@Bean
+	public StudentRepository studentRepository() {
+		return new StudentRepositoryImpl();
+	}
+
+	@Bean
+	public SupervisorService supervisorService() {
+		return new SupervisorServiceImpl();
+	}
+
+	@Bean
+	public SupervisorRepository supervisorRepository() {
+		return new SupervisorRepositoryImpl();
+	}
+
+	@Bean
+	public AdminService adminService() {
+		return new AdminServiceImpl();
+	}
+
+	@Bean
+	public AdminRepository adminRepository() {
+		return new AdminRepositoryImpl();
+	}
 }

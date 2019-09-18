@@ -15,28 +15,17 @@
       function madeAjaxCall(){
        $.ajax({
         type: "post",
-        url: "http://localhost:8080/webstore/rest/student",
+        url: "http://localhost:8080/webstore/rest/admin/changeSupervisor",
         cache: false,    
         data:'studentId=' + $("#studentId").val(),
-        success: function(response){     
-	         document.getElementById("userName").innerHTML = response.userName; 
-	         document.getElementById("currentSupervisor").innerHTML = response.supervisor; 
-         
-	         $.ajax({
-	             type: "post",
-	             url: "http://localhost:8080/webstore/rest/supervisor/allExcept",
-	             cache: false,    
-	             data:'supervisorId=9990101' ,
-	             success: function(supervisors){
-	  
-	     	        for(var i = 0; i < supervisors.length; i++) {
-	     	           $('#newSupervisors select').append('<option value='+supervisors[i].userName+'>'+supervisors[i].userName+'</option>');
-	     	        }
-	             },
-	             error: function(){      
-	              alert('Error while supervisors request..');
-	             }
-	            });
+        success: function(changeSupervisorDTO){     
+	         document.getElementById("userName").innerHTML = changeSupervisorDTO.studentName; 
+	         document.getElementById("currentSupervisor").innerHTML = changeSupervisorDTO.supervisorUserName;          
+	         var supervisors = changeSupervisorDTO.supervisors ;
+	            Object.keys(supervisors).forEach(function(key) {
+	        	    console.log(key, supervisors[key]);
+		     	      $('#newSupervisors select').append('<option value='+supervisors[key]+'>'+supervisors[key]+'</option>');
+	        	});	         	            
         },
         error: function(){      
          alert('Error while request..');
