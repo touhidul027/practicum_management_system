@@ -53,7 +53,12 @@ dept. administrator
 	4.8 for @autowired purpose ,create service and repository bean
 	4.9 AdminService is may use other service or repository
 	4.10 return value as map in ajax client and append it to the select options
-	4.11 Done
+	4.11 Now select any supervisor
+	4.12 Then click on change button,make a ajax call,get the studentId and new 
+	     supervisor id,and update the student suprvisor information in 'students' table
+    4.13 Return ChangeSupervisorDTO back to jsp page
+	4.14 Done
 
+	
 
 

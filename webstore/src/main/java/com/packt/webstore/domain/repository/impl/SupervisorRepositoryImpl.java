@@ -26,18 +26,6 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 		return supervisors;
 	}
 
-	private static final class SupervisorRowMapper implements RowMapper<Supervisor> {
-
-		@Override
-		public Supervisor mapRow(ResultSet rs, int rowNum) throws SQLException {
-			Supervisor supervisor = new Supervisor();
-			supervisor.setSupervisorId(rs.getInt("supervisor_id"));// supervisor_id is a db column name
-			supervisor.setUserName(rs.getString("user_name"));
-			return supervisor;
-		}
-
-	}
-
 	@Override
 	public Supervisor getSupervisor(int id) {
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -49,13 +37,25 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 
 	@Override
 	public Supervisor getSupervisorByUserName(String supervisorUserName) {
-		
+
 		System.out.println(SupervisorRepositoryImpl.class + " " + supervisorUserName);
-		
+
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("supervisorUserName", supervisorUserName);
-		Supervisor supervisor = (Supervisor) jdbcTemplate
-				.queryForObject("SELECT * FROM supervisors WHERE user_name=:supervisorUserName", param, new SupervisorRowMapper());
+		Supervisor supervisor = (Supervisor) jdbcTemplate.queryForObject(
+				"SELECT * FROM supervisors WHERE user_name=:supervisorUserName", param, new SupervisorRowMapper());
 		return supervisor;
+	}
+
+	private static final class SupervisorRowMapper implements RowMapper<Supervisor> {
+		@Override
+		public Supervisor mapRow(ResultSet rs, int rowNum) throws SQLException {
+			Supervisor supervisor = new Supervisor();
+			supervisor.setSupervisorId(rs.getInt("supervisor_id"));// supervisor_id is a db column name
+			supervisor.setUserName(rs.getString("user_name"));
+			supervisor.setEmail(rs.getNString("email"));
+			supervisor.setDepartment(rs.getString("department"));
+			return supervisor;
+		}
 	}
 }

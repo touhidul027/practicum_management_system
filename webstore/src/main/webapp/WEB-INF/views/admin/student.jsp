@@ -17,7 +17,7 @@
 <jsp:include page="header.jsp"></jsp:include>
  
 Student details: <br>
-Student ID :  ${student.id }<br>
+Student ID :  ${student.studentId }<br>
 Name :  ${student.userName }<br>
 
  

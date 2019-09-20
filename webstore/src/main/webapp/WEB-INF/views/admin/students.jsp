@@ -23,8 +23,8 @@
       <th scope="col">#</th>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
-      <th scope="col">Supervisor</th>
-	  <th scope="col">Change</th>
+      <th scope="col">Email</th>
+	  <th scope="col">Department</th>
     </tr>
   </thead>
   <tbody>
@@ -32,10 +32,10 @@
   <c:forEach items="${students}" var="student">
    <tr>
       <th scope="row">1</th>
-      <td> <a class="nav-link"  href="<c:url value="/admin/getStudent/${student.id }" /> " >${student.id }</a> </td>
+      <td> <a class="nav-link"  href="<c:url value="/admin/getStudent/${student.studentId }" /> " >${student.studentId }</a> </td>
       <td>${student.userName }</td>
-      <td>${student.supervisor }</td>
-	  <td>${student.userName }</td>
+      <td>${student.studentEmail }</td>
+	  <td>${student.studentDepartment }</td>
     </tr>
   </c:forEach>
 	 <tr>

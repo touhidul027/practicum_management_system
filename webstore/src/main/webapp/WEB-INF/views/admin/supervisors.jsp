@@ -23,28 +23,23 @@
       <th scope="col">#</th>
       <th scope="col">ID</th>
       <th scope="col">Name</th>
-      <th scope="col">Assigned Students</th>
-	  <th scope="col">Max Number of Assigned Students</th>
+      <th scope="col">Email</th>
+	  <th scope="col">Department</th>
     </tr>
   </thead>
   <tbody>
+  <c:set var="count" value="0" scope="page" />
   <c:forEach items="${supervisors}" var="supervisor">
+  <c:set var="count" value="${count + 1}" scope="page"/>
     <tr>
-      <th scope="row">1</th>
+      <th scope="row"> <c:out value="${count}" /> </th>
       <td><a class="nav-link"  href="<c:url value="/admin/getSupervisor/${supervisor.supervisorId } " /> " >${supervisor.supervisorId } </a> </td>
       <td>${supervisor.userName}</td>
-      <td> 5 </td>
-	  <td>5 "edit icon here" </td>
+      <td> ${supervisor.email} </td>
+	  <td>${supervisor.department} </td>
     </tr>
     </c:forEach>
     
-	 <tr>
-      <th scope="row">1</th>
-      <td>15103199</td>
-      <td>Md. Touhidul Islam</td>
-      <td>UKD</td>
-	  <td>Confirmed</td>
-    </tr>
   </tbody>
 </table>
 </div>

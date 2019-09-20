@@ -25,13 +25,21 @@ public class AdminRestController {
 	@Autowired
 	private AdminService adminService;
 
-	@RequestMapping(value = "/changeSupervisor", method = RequestMethod.POST)
-	public @ResponseBody ChangeSupervisorDTO changeSupervisor(HttpServletRequest request, HttpServletResponse response)
+	@RequestMapping(value = "/changeSupervisor/getInfo", method = RequestMethod.POST)
+	public @ResponseBody ChangeSupervisorDTO getChangeSupervisorDTO(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		String studentId = request.getParameter("studentId");
-		ChangeSupervisorDTO changeSupervisorDTO = adminService.changeSupervisor(Integer.parseInt(studentId));
+		ChangeSupervisorDTO changeSupervisorDTO = adminService.getChangeSupervisorDTO(Integer.parseInt(studentId));
 		System.out.println(AdminRestController.class);
 		System.out.println(changeSupervisorDTO);
+		return changeSupervisorDTO;
+	}
+	
+	@RequestMapping(value = "/changeSupervisor/change", method = RequestMethod.POST)
+	public @ResponseBody ChangeSupervisorDTO change(HttpServletRequest request, HttpServletResponse response) {
+		String studentId = request.getParameter("studentId");
+		String supervisorId = request.getParameter("supervisorId");
+		ChangeSupervisorDTO changeSupervisorDTO=adminService.changeSupervisor(Integer.parseInt(studentId),Integer.parseInt(supervisorId));
 		return changeSupervisorDTO;
 	}
 

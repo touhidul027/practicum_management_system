@@ -8,6 +8,9 @@ import com.packt.webstore.dto.ChangeSupervisorDTO;
 public interface AdminService {
 	public List<Supervisor> getSupervisorsExcept(int supervisorId);
 
-	public ChangeSupervisorDTO changeSupervisor(int studentId);
+	public ChangeSupervisorDTO getChangeSupervisorDTO(int studentId);
+
+	public ChangeSupervisorDTO changeSupervisor(int parseInt, int parseInt2);
+	
 
 }

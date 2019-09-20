@@ -35,7 +35,7 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public ChangeSupervisorDTO changeSupervisor(int studentId) {
+	public ChangeSupervisorDTO getChangeSupervisorDTO(int studentId) {
 		Student student = studentRepository.getStudent(studentId);
 		Supervisor supervisor = studentRepository.getStudentSupervisor(studentId);
 		int supervisorId = supervisor.getSupervisorId();
@@ -53,6 +53,17 @@ public class AdminServiceImpl implements AdminService {
 		ChangeSupervisorDTO changeSupervisorDTO = new ChangeSupervisorDTO(studentId, student.getUserName(),
 				supervisorId, supervisor.getUserName(), supervisors);
 
+		return changeSupervisorDTO;
+	}
+
+	@Override
+	public ChangeSupervisorDTO changeSupervisor(int studentId, int supervisorId) {
+		boolean flag = adminRepository.changeSupervisor(studentId, supervisorId);
+
+		ChangeSupervisorDTO changeSupervisorDTO = null;
+		if (flag == true) {
+			changeSupervisorDTO = getChangeSupervisorDTO(studentId);
+		}
 		return changeSupervisorDTO;
 	}
 
