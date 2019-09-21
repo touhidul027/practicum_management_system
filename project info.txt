@@ -59,6 +59,14 @@ dept. administrator
     4.13 Return ChangeSupervisorDTO back to jsp page
 	4.14 Done
 
-	
+5. Dept. Admin can register student account in the system
+	5.1 Add student form to Students page
+	5.2 Add needed information
+	5.3 Make Ajax call
+	5.4 hit controller,service,repository
+	5.5 Back that student from the controller to web page
 
+Actor : Student
+6. Student can see his profile information
+7. Student can edit his profile information
 

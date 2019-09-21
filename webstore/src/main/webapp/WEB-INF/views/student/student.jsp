@@ -18,6 +18,6 @@
 </head>
 <body>
 <!-- add header part  ? which lib iis used-->
-<jsp:include page="h.jsp" flush="true"></jsp:include>
+<jsp:include page="header.jsp" flush="true"></jsp:include>
 </body>
 </html>

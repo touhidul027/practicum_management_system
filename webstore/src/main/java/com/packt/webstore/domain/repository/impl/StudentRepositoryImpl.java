@@ -37,6 +37,15 @@ public class StudentRepositoryImpl implements StudentRepository {
 		return student;
 	}
 
+	@Override
+	public Student getStudentByEmail(String studentEmail) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("studentEmail", studentEmail);
+		Student student = (Student) jdbcTemplate.queryForObject("SELECT * FROM students WHERE student_email=:studentEmail LIMIT 1",
+				param, new StudentMapper());
+		return student;
+	}
+
 	public List<Student> getStudents() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		List<Student> students = jdbcTemplate.query("SELECT * FROM students", params, new StudentMapper());
@@ -65,7 +74,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 				+ " VALUES(:studentId, :studentName, :studentEmail, :department,:supervisorId)";
 		int affectedRow = jdbcTemplate.update(sql, paramMaps);
 
-		return affectedRow==0 ? false : true ;
+		return affectedRow == 0 ? false : true;
 	}
 
 	private static final class StudentMapper implements RowMapper<Student> {

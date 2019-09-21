@@ -38,4 +38,9 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepository.registerStudent(studentId, studentName, studentEmail, department);
 	}
 
+	@Override
+	public Student getStudentByEmail(String userEmail) {
+		return studentRepository.getStudentByEmail(userEmail);
+	}
+
 }
