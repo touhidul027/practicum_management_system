@@ -28,8 +28,14 @@ public class StudentServiceImpl implements StudentService {
 
 	@Override
 	public Supervisor getStudentSupervisor(int studentId) {
-		
+
 		return studentRepository.getStudentSupervisor(studentId);
+	}
+
+	@Override
+	public boolean registerStudent(int studentId, String studentName, String studentEmail, String department) {
+		// TODO Auto-generated method stub
+		return studentRepository.registerStudent(studentId, studentName, studentEmail, department);
 	}
 
 }

@@ -134,7 +134,7 @@
 		  Student ID : 
 		</div>
 		<div class="col-3" id="resultedStudentId">
-		  15103199
+		 
 		</div>
     </div>
     <div class="form-row">
@@ -142,7 +142,7 @@
 		  Supervisor Name : 
 		</div>
 		<div class="col-3" id="resultedSupervisorName">
-		  Safwana Haque
+		  
 		</div>
     </div>
 	
@@ -151,7 +151,7 @@
 		  Supervisor Email : 
 		</div>
 		<div class="col-3" id="resultedSupervisorEmail">
-		  mail link
+		  
 		</div>
     </div>
     

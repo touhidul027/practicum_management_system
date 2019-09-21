@@ -48,8 +48,24 @@ public class StudentRepositoryImpl implements StudentRepository {
 		// fetch supervisor id from the students table
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentId", studentId);
-		int supervisorId = jdbcTemplate.queryForObject("select supervisor_id from students WHERE student_id=:studentId LIMIT 1", param, Integer.class);
+		int supervisorId = jdbcTemplate.queryForObject(
+				"select supervisor_id from students WHERE student_id=:studentId LIMIT 1", param, Integer.class);
 		return supervisorRepository.getSupervisor(supervisorId);
+	}
+
+	@Override
+	public boolean registerStudent(int studentId, String studentName, String studentEmail, String department) {
+		Map<String, Object> paramMaps = new HashMap<String, Object>();
+		paramMaps.put("studentId", studentId);
+		paramMaps.put("studentName", studentName);
+		paramMaps.put("studentEmail", studentEmail);
+		paramMaps.put("department", department);
+		paramMaps.put("supervisorId", 0);
+		String sql = "INSERT INTO students(student_id,user_name,student_email,student_department,supervisor_id)"
+				+ " VALUES(:studentId, :studentName, :studentEmail, :department,:supervisorId)";
+		int affectedRow = jdbcTemplate.update(sql, paramMaps);
+
+		return affectedRow==0 ? false : true ;
 	}
 
 	private static final class StudentMapper implements RowMapper<Student> {
@@ -60,7 +76,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 			student.setStudentId(rs.getInt("student_id"));
 			student.setUserName(rs.getString("user_name"));
 			student.setStudentEmail(rs.getString("student_email"));
-			student.setStudentDepartment(rs.getString("student_department"));	
+			student.setStudentDepartment(rs.getString("student_department"));
 			return student;
 		}
 	}

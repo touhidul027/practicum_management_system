@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.packt.webstore.domain.Student;
+import com.packt.webstore.dto.ChangeSupervisorDTO;
 import com.packt.webstore.service.StudentService;
 
 @RestController
@@ -27,15 +28,28 @@ public class StudentRestController {
 		return studentService.getStudentById(Integer.parseInt(id));
 	}
 
-	@RequestMapping(value="/all",method = RequestMethod.GET)
-	public List<Student> getStudents(){
+	@RequestMapping(value = "/all", method = RequestMethod.GET)
+	public List<Student> getStudents() {
 		return studentService.getStudents();
 	}
-	
+
 	@RequestMapping(method = RequestMethod.POST)
 	public @ResponseBody Student add(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		String studentId = request.getParameter("studentId");
 		System.out.println("invoked.");
 		return studentService.getStudentById(Integer.parseInt(studentId));
+	}
+
+	@RequestMapping(value = "/registerStudent", method = RequestMethod.POST)
+	public @ResponseBody Student addStudent(HttpServletRequest request, HttpServletResponse response) {
+		int studentId = Integer.parseInt(request.getParameter("studentId"));
+		String studentName = request.getParameter("studentName");
+		String studentEmail = request.getParameter("studentEmail");
+		String department = "CSE";
+		boolean flag = studentService.registerStudent(studentId, studentName, studentEmail, department);
+		System.out.println(flag);
+		Student s = studentService.getStudentById(studentId) ;
+		System.out.println(s);
+		return flag==true ? s:null;
 	}
 }

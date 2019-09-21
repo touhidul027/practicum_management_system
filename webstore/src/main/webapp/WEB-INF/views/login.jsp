@@ -13,7 +13,7 @@
    <section>
       <div class="jumbotron">
          <div class="container">
-            <h1>Welcome to Practicum Management</h1>
+            <h1>Welcome to School management System</h1>
             <p>A Product of Square Dots</p>
          </div>
       </div>
