@@ -69,4 +69,11 @@ dept. administrator
 Actor : Student
 6. Student can see his profile information
 7. Student can edit his profile information
+    7.1 Mail,Name,department,Id can not be edited by a student
+    7.2 Adding cellPhone,password attribute to the domain object
+    7.3 Adding cellPhone,password column to the students table 
+    7.4 Going to Repository class , mapping row mapper
+	7.5 Creating Controller method,service method,repository method.
+	7.6 Done
+
 

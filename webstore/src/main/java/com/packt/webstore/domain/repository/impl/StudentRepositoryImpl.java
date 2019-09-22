@@ -86,8 +86,20 @@ public class StudentRepositoryImpl implements StudentRepository {
 			student.setUserName(rs.getString("user_name"));
 			student.setStudentEmail(rs.getString("student_email"));
 			student.setStudentDepartment(rs.getString("student_department"));
+			student.setCellPhone(rs.getString("cell_phone_number"));
+			student.setPassword(rs.getString("password"));
 			return student;
 		}
+	}
+
+	@Override
+	public boolean updateStudent(int studentId,String cellPhone, String password) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("studentId", studentId);
+		params.put("cell_phone_number", cellPhone);
+		params.put("password", password);
+		int rowsAffected = jdbcTemplate.update("UPDATE students SET cell_phone_number =:cell_phone_number, password=:password WHERE student_id = :studentId", params);
+		return rowsAffected==0 ? false:true;
 	}
 
 }

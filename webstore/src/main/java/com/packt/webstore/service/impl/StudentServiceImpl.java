@@ -43,4 +43,9 @@ public class StudentServiceImpl implements StudentService {
 		return studentRepository.getStudentByEmail(userEmail);
 	}
 
+	@Override
+	public boolean updateStudent(int studentId, String cellPhone, String password) {
+		return studentRepository.updateStudent(studentId,cellPhone,password);
+	}
+
 }

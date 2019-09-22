@@ -21,85 +21,44 @@
 <jsp:include page="header.jsp" flush="true"></jsp:include>
 <br><br>
 <div class="container">
-  <a class="btn btn-link"  href="<c:url value="/student/edit/${student.studentId}" /> " ><h4>Edit</h4></a>
-<div>
-
-<form:form method="POST" modelAttribute="student"  >
-	<div class="card">
-	  <div class="card-header">
-	    <div>Profile Information</div> 
-	  </div>
-	  
-	  <div class="card-body">
-	    <div class="form-row">
-		<div class="col-2" >
-		  Name : 
-		</div>
-		<div class="col-2" id="">
-		   ${student.userName}
-		</div>
-        </div>
-	  </div>
-	  
-	  <div class="card-body">
-	    <div class="form-row">
-		<div class="col-2" >
-		  ID : 
-		</div>
-		<div class="col-2" id="">
-		   ${student.studentId}
-		</div>
-        </div>
-	  </div>
-	  
-	  <div class="card-body">
-	    <div class="form-row">
-		<div class="col-2" >
-		  Email : 
-		</div>
-		<div class="col-2" id="">
-		   ${student.studentEmail}
-		</div>
-        </div>
-	  </div>
-	  
-	  <div class="card-body">
-	    <div class="form-row">
-		<div class="col-2" >
-		   Department: 
-		</div>
-		<div class="col-2" id="">
-		   ${student.studentDepartment}
-		</div>
-        </div>
-	  </div>
-	  
-	  <div class="card-body">
-	    <div class="form-row">
-		<div class="col-2" >
-		  Password: 
-		</div>
-		<div class="col-2" id="">
-		   Not Available
-		</div>
-        </div>
-	  </div>
-	  
-	  <div class="card-body">
-	    <div class="form-row">
-		<div class="col-2" >
-		  Cell: 
-		</div>
-		<div class="col-2" id="">
-		   <input >
-		</div>
-        </div>
-	  </div>
-	  
-	</div>
-</form:form>
-
-</div>
+<form:form method="POST"
+          action="" modelAttribute="student">
+             <table>
+             <fieldset>
+                 <legend>Not Editable:</legend>
+                <tr>
+                    <td><form:label path="userName">Name</form:label></td>
+                    <td><form:input path="userName" readonly="true"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="studentId">Id</form:label></td>
+                    <td><form:input path="studentId" readonly="true"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="studentEmail">Student Email</form:label></td>                  
+                    <td><form:input path="studentEmail" readonly="true"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="studentDepartment">Student Department</form:label></td>                  
+                    <td> <form:input path="studentDepartment" readonly="true"/> </td>
+                </tr>
+            </fieldset>
+                
+                <tr>
+                    <td><form:label path="cellPhone">Cell Phone</form:label></td>                  
+                    <td><form:input path="cellPhone"/></td>
+                </tr>
+                
+                <tr>
+                    <td><form:label path="password">Password</form:label></td>                  
+                    <td><form:input path="password"/></td>
+                </tr>
+                
+                <tr>
+                    <td><input type="submit" value="Submit"/></td>
+                </tr>
+            </table>
+        </form:form>
 </div>
 
 </body>

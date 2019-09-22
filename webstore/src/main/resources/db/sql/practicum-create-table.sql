@@ -6,7 +6,9 @@ CREATE TABLE students (
   user_name VARCHAR(30),
   student_email VARCHAR(30),
   student_department VARCHAR(30),
-  supervisor_id INTEGER
+  supervisor_id INTEGER,
+  cell_phone_number VARCHAR(30),
+  password VARCHAR(20)
 );
 
 CREATE TABLE supervisors (

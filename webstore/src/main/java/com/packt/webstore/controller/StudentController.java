@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -20,28 +21,30 @@ public class StudentController {
 
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String studentsPage(Model model, Principal principal) {
-		String userEmail = principal.getName() ;
+		String userEmail = principal.getName();
 		System.out.println(principal.toString());
 		Student student = studentService.getStudentByEmail(userEmail);
-		model.addAttribute("student",student);
+		model.addAttribute("student", student);
 		return getFullViewName("profile");
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String editStudent(Model model, Principal principal) {
-		String userEmail = principal.getName() ;
+		String userEmail = principal.getName();
 		Student student = studentService.getStudentByEmail(userEmail);
-		model.addAttribute("student",student);
+		model.addAttribute("student", student);
 		return getFullViewName("editProfile");
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String saveStudent(Model model, Principal principal) {
-		String userEmail = principal.getName() ;
-		Student student = studentService.getStudentByEmail(userEmail);
-		model.addAttribute("student",student);
-		return getFullViewName("editProfile");
+	public String saveStudent(Model model, Principal principal, @ModelAttribute("employee") Student student) {
+		int studentId = student.getStudentId();
+		String cellPhone = student.getCellPhone();
+		String password = student.getPassword();
+		boolean flag = studentService.updateStudent(studentId, cellPhone, password);
+		return "redirect:/student/profile";
 	}
+
 	public String getFullViewName(String viewName) {
 		return "student/" + viewName;
 	}

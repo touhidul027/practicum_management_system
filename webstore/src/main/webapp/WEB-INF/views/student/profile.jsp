@@ -75,10 +75,21 @@
 	  <div class="card-body">
 	    <div class="form-row">
 		<div class="col-2" >
+		  Cell Phone: 
+		</div>
+		<div class="col-2" id="">
+		   ${student.cellPhone}
+		</div>
+        </div>
+	  </div>
+	  
+	  <div class="card-body">
+	    <div class="form-row">
+		<div class="col-2" >
 		  Password: 
 		</div>
 		<div class="col-2" id="">
-		   Not Available
+		   ${student.password}
 		</div>
         </div>
 	  </div>
