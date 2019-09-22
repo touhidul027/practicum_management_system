@@ -19,6 +19,8 @@
         cache: false,    
         data:'studentId=' + $("#studentId").val(),
         success: function(changeSupervisorDTO){  
+     	   document.getElementById("cng-supervisor-list").style.display = "block";
+     	   document.getElementById("new-supervisor-info").style.display = "none";
         	 $('#newSupervisors select').find('option').remove();    	
 	         document.getElementById("userName").innerHTML = changeSupervisorDTO.studentName; 
 	         document.getElementById("showInfo").innerHTML = $("#studentId").val();
@@ -46,7 +48,10 @@
               url: "http://localhost:8080/webstore/rest/admin/changeSupervisor/change",
               cache: false, 
               data:'studentId=' + $("#studentId").val()+"&supervisorId="+newSupervisorId,
-              success: function(changeSupervisorDTO){       	                    	  
+              success: function(changeSupervisorDTO){ 
+            	   document.getElementById("cng-supervisor-list").style.display = "none";
+           	    document.getElementById("new-supervisor-info").style.display = "block";
+
                   $('#resultedStudentName').empty().append(changeSupervisorDTO.studentName);
                   $('#resultedStudentId').empty().append(changeSupervisorDTO.studentId);
                   $('#resultedSupervisorName').empty().append(changeSupervisorDTO.supervisorUserName);
@@ -82,7 +87,7 @@
   </div>			
 </form>
 
-<div class="card" style="width: 60rem;">
+<div class="card" style="width: 60rem;display:none;" id="cng-supervisor-list" >
   <div class="card-body">
     <h5 class="card-title" id="userName" ></h5>
     <div class="card-subtitle mb-2 text-muted" id="showInfo">
@@ -114,7 +119,7 @@
 </div>
 <br><br>
 
-<div class="card changeSupervisorResultForm" style="width: 60rem;">
+<div class="card changeSupervisorResultForm" style="width: 60rem;display:none;" id="new-supervisor-info" >
   <div class="card-body">
 
     <div class="card-subtitle mb-2 " id="">

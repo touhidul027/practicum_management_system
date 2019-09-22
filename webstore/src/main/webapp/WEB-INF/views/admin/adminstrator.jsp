@@ -16,11 +16,13 @@
 <!-- add header part  ? which lib iis used-->
 <jsp:include page="header.jsp"></jsp:include>
  
- <div >
-    Recent History
-</div>
+ <br>
 
 <div class="container" >
+<div >
+    Recent History 
+</div>
+<br>
 <table class="table table-hover">
   <thead>
     <tr>

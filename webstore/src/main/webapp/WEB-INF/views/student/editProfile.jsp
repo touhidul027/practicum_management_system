@@ -21,8 +21,10 @@
 <jsp:include page="header.jsp" flush="true"></jsp:include>
 <br><br>
 <div class="container">
-  <a class="btn btn-link"  href="<c:url value="/student/edit" /> " ><h4>Edit</h4></a>
+  <a class="btn btn-link"  href="<c:url value="/student/edit/${student.studentId}" /> " ><h4>Edit</h4></a>
 <div>
+
+<form:form method="POST" modelAttribute="student"  >
 	<div class="card">
 	  <div class="card-header">
 	    <div>Profile Information</div> 
@@ -83,8 +85,20 @@
         </div>
 	  </div>
 	  
+	  <div class="card-body">
+	    <div class="form-row">
+		<div class="col-2" >
+		  Cell: 
+		</div>
+		<div class="col-2" id="">
+		   <input >
+		</div>
+        </div>
+	  </div>
+	  
 	</div>
-	
+</form:form>
+
 </div>
 </div>
 

@@ -26,7 +26,22 @@ public class StudentController {
 		model.addAttribute("student",student);
 		return getFullViewName("profile");
 	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public String editStudent(Model model, Principal principal) {
+		String userEmail = principal.getName() ;
+		Student student = studentService.getStudentByEmail(userEmail);
+		model.addAttribute("student",student);
+		return getFullViewName("editProfile");
+	}
 
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
+	public String saveStudent(Model model, Principal principal) {
+		String userEmail = principal.getName() ;
+		Student student = studentService.getStudentByEmail(userEmail);
+		model.addAttribute("student",student);
+		return getFullViewName("editProfile");
+	}
 	public String getFullViewName(String viewName) {
 		return "student/" + viewName;
 	}
