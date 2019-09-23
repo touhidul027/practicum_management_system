@@ -21,28 +21,27 @@
 <jsp:include page="header.jsp" flush="true"></jsp:include>
 <br><br>
 <div class="container">
-<form:form method="POST"
+     * field are not editable
+     <form:form method="POST"
           action="" modelAttribute="student">
              <table>
-             <fieldset>
-                 <legend>Not Editable:</legend>
                 <tr>
-                    <td><form:label path="userName">Name</form:label></td>
+                    <td><form:label path="userName">Name*</form:label></td>
                     <td><form:input path="userName" readonly="true"/></td>
                 </tr>
                 <tr>
-                    <td><form:label path="studentId">Id</form:label></td>
+                    <td><form:label path="studentId">Id*</form:label></td>
                     <td><form:input path="studentId" readonly="true"/></td>
                 </tr>
                 <tr>
-                    <td><form:label path="studentEmail">Student Email</form:label></td>                  
+                    <td><form:label path="studentEmail">Student Email*</form:label></td>                  
                     <td><form:input path="studentEmail" readonly="true"/></td>
                 </tr>
                 <tr>
-                    <td><form:label path="studentDepartment">Student Department</form:label></td>                  
+                    <td><form:label path="studentDepartment">Student Department*</form:label></td>                  
                     <td> <form:input path="studentDepartment" readonly="true"/> </td>
                 </tr>
-            </fieldset>
+            
                 
                 <tr>
                     <td><form:label path="cellPhone">Cell Phone</form:label></td>                  

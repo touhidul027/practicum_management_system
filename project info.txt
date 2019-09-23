@@ -5,6 +5,8 @@ Department-administrator :
 Super-visor :
 Student : 
 
+Functional Requirements List:
+
 dept. administrator
 --------------------
 1.he can create supervisor account
@@ -65,15 +67,23 @@ dept. administrator
 	5.3 Make Ajax call
 	5.4 hit controller,service,repository
 	5.5 Back that student from the controller to web page
+6. Admin can Send Notice to respective User
+	6.1 Creating Notice jsp page,notice.jsp-done
 
 Actor : Student
-6. Student can see his profile information
-7. Student can edit his profile information
+------------------
+1. Student can see his profile information
+2. Student can edit his profile information
     7.1 Mail,Name,department,Id can not be edited by a student
     7.2 Adding cellPhone,password attribute to the domain object
     7.3 Adding cellPhone,password column to the students table 
     7.4 Going to Repository class , mapping row mapper
 	7.5 Creating Controller method,service method,repository method.
 	7.6 Done
+3.Student can see supervisor imformation
+ 3.1 Click on supervisor nav-link,going to student controller,get the supervisor from
+ respective reposiroty,back the model object on view page.
+
+
 
 
