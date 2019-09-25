@@ -50,17 +50,6 @@
 	  <li class="nav-item">
         <a class="nav-link" href="<c:url value="/admin/notice" /> ">Notices</a>
       </li>
-	  
-	  <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Assign Supervisor
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">All Supervisor</a>
-          <a class="dropdown-item" href="#">All Students</a>
-          <a class="dropdown-item" href="<c:url value="/admin/asignSupervisorManually" /> " >Manually</a>
-        </div>
-      </li>
       
 	  <li class="nav-item">
         <a class="nav-link" href="<c:url value="/admin/message" /> " >Message</a>

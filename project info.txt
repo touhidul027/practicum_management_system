@@ -67,9 +67,17 @@ dept. administrator
 	5.3 Make Ajax call
 	5.4 hit controller,service,repository
 	5.5 Back that student from the controller to web page
-6. Admin can Send Notice to respective User
+*6. Admin can Send Notice to respective User
 	6.1 Creating Notice jsp page,notice.jsp-done
+    6.2 Creating Notice.java domain object
+	6.3 Creating a NoticeDTO in DTO package
+	6.3 Creating a Method.GET method to set the NoticeDTO in model attribute in controller
+    6.4 Create NoticeService bean in controller
+	6.5 Make NoticeService interface,concrete implementation NoticeServiceImpl
+	6.5 Make NoticeService bean available in the context
 
+
+	
 Actor : Student
 ------------------
 1. Student can see his profile information
