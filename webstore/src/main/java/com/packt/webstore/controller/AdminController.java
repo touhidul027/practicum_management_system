@@ -1,17 +1,23 @@
 package com.packt.webstore.controller;
 
+import java.security.Principal;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.packt.webstore.domain.Student;
 import com.packt.webstore.domain.Supervisor;
+import com.packt.webstore.dto.NoticeDTO;
 import com.packt.webstore.service.DeptAdminService;
+import com.packt.webstore.service.NoticeService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
 import com.packt.webstore.service.impl.DeptAdminServiceImpl;
@@ -21,9 +27,12 @@ import com.packt.webstore.service.impl.DeptAdminServiceImpl;
 public class AdminController {
 	@Autowired
 	private StudentService studentService;
-	
+
 	@Autowired
 	SupervisorService supervisorService;
+	
+	@Autowired 
+	NoticeService noticeService ; 
 
 	@RequestMapping(value = "/students", method = RequestMethod.GET)
 	public String studentsPage(Model model) {
@@ -38,17 +47,18 @@ public class AdminController {
 
 	@RequestMapping(value = "/supervisors", method = RequestMethod.GET)
 	public String supervisorList(Model model) {
-		List<Supervisor> supervisors=   supervisorService.getSupervisors();
+		List<Supervisor> supervisors = supervisorService.getSupervisors();
 		model.addAttribute("supervisors", supervisors);
 		return getFullViewName("supervisors");
 	}
 
 	@RequestMapping(value = "/getSupervisor/{id}", method = RequestMethod.GET)
 	public String supervisor(Model model, @PathVariable(value = "id") String id) {
-		Supervisor supervisor=   supervisorService.getSupervisor(Integer.parseInt(id));
+		Supervisor supervisor = supervisorService.getSupervisor(Integer.parseInt(id));
 		model.addAttribute("supervisor", supervisor);
 		return getFullViewName("supervisor");
 	}
+
 	@RequestMapping(value = "/studentPerformance", method = RequestMethod.GET)
 	public String studentPerformance() {
 		return "admin/studentPerformance";
@@ -60,8 +70,20 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/notice", method = RequestMethod.GET)
-	public String adminNoticePage() {
+	public String notice(HttpServletRequest req,Model model,Principal principal ) {
+		NoticeDTO noticeDTO = new NoticeDTO();
+		noticeDTO.setFrom(principal.getName());
+		noticeDTO.setNoticeId(0);
+		model.addAttribute("noticeDTO", noticeDTO);
 		return "admin/notice";
+	}
+
+	@RequestMapping(value = "/notice", method = RequestMethod.POST)
+	public String saveNotice(Model model, Principal principal, @ModelAttribute("noticeDTO") NoticeDTO noticeDTO) {
+		System.out.println(noticeDTO);
+		boolean flag=noticeService.saveNotice(noticeDTO);
+		
+		return "redirect:/admin/notice";
 	}
 
 	@RequestMapping(value = "/message", method = RequestMethod.GET)
@@ -83,10 +105,10 @@ public class AdminController {
 	public String getStudent(Model model, @PathVariable(value = "id") String id) {
 		System.out.println("admin controller");
 		model.addAttribute("student", studentService.getStudentById(Integer.parseInt(id)));
-		 return getFullViewName("student");
+		return getFullViewName("student");
 	}
-	
+
 	public String getFullViewName(String viewName) {
-		return "admin/"+viewName ; 
+		return "admin/" + viewName;
 	}
 }

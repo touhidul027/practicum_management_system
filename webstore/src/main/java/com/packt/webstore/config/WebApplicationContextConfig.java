@@ -44,9 +44,11 @@ import com.packt.webstore.domain.repository.impl.SupervisorRepositoryImpl;
 import com.packt.webstore.interceptor.ProcessingTimeLogInterceptor;
 import com.packt.webstore.interceptor.PromoCodeInterceptor;
 import com.packt.webstore.service.AdminService;
+import com.packt.webstore.service.NoticeService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
 import com.packt.webstore.service.impl.AdminServiceImpl;
+import com.packt.webstore.service.impl.NoticeServiceImpl;
 import com.packt.webstore.service.impl.StudentServiceImpl;
 import com.packt.webstore.service.impl.SupervisorServiceImpl;
 import com.packt.webstore.validator.ProductValidator;
@@ -210,5 +212,10 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public AdminRepository adminRepository() {
 		return new AdminRepositoryImpl();
+	}
+
+	@Bean
+	public NoticeService noticeService() {
+		return new NoticeServiceImpl();
 	}
 }

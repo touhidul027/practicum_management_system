@@ -14,25 +14,37 @@
   <script type = "text/javascript">
 	  function targetAll() {   	 
 		   document.getElementById("target").value = "ALL users will get this notice";  	  
+		   document.getElementById("recipent").style.display="";
+		   document.getElementById("toId").value = "All";
 	  }
 	  function targetSupervisors() {   	 
 		   document.getElementById("target").value = "Only All Supervisors will get this notice";  	  
+		   document.getElementById("recipent").style.display="";
+		   document.getElementById("toId").value = "Supervisors";
 	  }
 	  
 	  function targetStudents() {   	 
 		   document.getElementById("target").value = "Only All students will get this notice ";  	  
+		   document.getElementById("recipent").style.display="";
+		   document.getElementById("toId").value = "Students";
 	  }
 	  
 	  function targetSupervisor() {   	 
 		   document.getElementById("target").value = "Specific Supervisor will get this notice.Provide ID";  	  
+		   document.getElementById("recipent").style.display="";
+		   document.getElementById("toId").value = "";
 	  }
 	  
-	  function targetStudent() {   	 
+	  function targetStudent() {
 		   document.getElementById("target").value = "Specific Student will get this notice.Give ID";  	  
+		   document.getElementById("recipent").style.display="";
+		   document.getElementById("toId").value = "";
 	  }
 	  
-	  function targetSupervisorGroups() {   	 
+	  function targetSupervisorGroups() {
 		   document.getElementById("target").value = "Particular supervisor and his students will get this notice.Provide Supervisor ID";  	  
+		   document.getElementById("recipent").style.display="";
+		   document.getElementById("toId").value = "";
 	  }    
   </script>
   
@@ -54,49 +66,54 @@
       <a class="dropdown-item" onclick="targetStudents();" >All Students</a>
       <a class="dropdown-item" onclick="targetSupervisor();">Specific Supervisor</a>
       <a class="dropdown-item" onclick="targetStudent();">Specific Student</a>
-      <a class="dropdown-item" onclick="targetSupervisorGroups();" >Supervisor Groups</a>
+      <a class="dropdown-item" onclick="targetSupervisorGroups();" >Supervisor and Groups</a>
      </div>
   </div> 
-  <input id="target" type="text" class="form-control" aria-label="Text input with dropdown button" value="ALl users will get Notice" >
+  <input id="target" type="text" class="form-control" aria-label="Text input with dropdown button" value="Select Option Specifically" >
 </div>
 
 </div>
-
 <br>
-
 
 </div>
 <br><br>
 
 <div class="container" >
 <div class="card" style="">
-<form>
-  
-  <div class="checkbox">
-  <label><input type="checkbox" value=""> Send Notice to Email Also </label>
-  </div>
-  
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Subject</label>
-    <div class="col-sm-10">
-      <input type="text" class="form-control" id="inputPassword3" placeholder="Need to be presented at.....">
-    </div>
-  </div>
+<c:url var="url" value="/admin/notice" />
 
-  <div class="form-group row">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Description</label>
-    <div class="col-sm-10">
-		<textarea class="form-control" rows="5" name="message"></textarea>    
-	</div>
-  </div>
-  
-  <div class="form-group row">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-primary">Publish Notice</button>
-    </div>
-  </div>
-  
-</form>
+<br>
+
+  <c:url var="url" value="/admin/notice" />
+
+      <form:form method="POST"
+          action="${url}" modelAttribute="noticeDTO">
+             <table>
+                <tr>
+                    <td><form:label path="from">From</form:label></td>
+                    <td><form:input path="from" readonly="true" /></td>
+                </tr>
+             
+                <tr id="recipent" style="display:none;" >
+                    <td><form:label  path="toId">Recipent ID</form:label></td>
+                    <td><form:input path="toId" id="toId" /></td>
+                </tr>
+                
+                <tr>
+                    <td><form:label path="subject">Subject</form:label></td>
+                    <td><form:input path="subject"/></td>
+                </tr>
+                <tr>
+                    <td><form:label path="description">Description</form:label></td>
+                    <td><form:textarea path="description" rows="5" cols="30"/></td>
+                </tr>
+                <tr>
+                    <td><input type="submit" value="Publish"/></td>
+                </tr>
+            </table>
+        </form:form>
+        
+
 </div>
 </div>
 
