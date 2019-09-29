@@ -6,7 +6,14 @@ public class NoticeDTO {
 	private String description;
 	private String from;
 	private String toId;
+	private int publisherId;
 	
+	public int getPublisherId() {
+		return publisherId;
+	}
+	public void setPublisherId(int publisherId) {
+		this.publisherId = publisherId;
+	}
 	public int getNoticeId() {
 		return noticeId;
 	}

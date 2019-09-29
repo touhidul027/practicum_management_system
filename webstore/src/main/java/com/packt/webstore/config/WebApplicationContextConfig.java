@@ -36,9 +36,11 @@ import org.springframework.web.util.UrlPathHelper;
 
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.domain.repository.AdminRepository;
+import com.packt.webstore.domain.repository.NoticeRepository;
 import com.packt.webstore.domain.repository.StudentRepository;
 import com.packt.webstore.domain.repository.SupervisorRepository;
 import com.packt.webstore.domain.repository.impl.AdminRepositoryImpl;
+import com.packt.webstore.domain.repository.impl.NoticeRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.StudentRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.SupervisorRepositoryImpl;
 import com.packt.webstore.interceptor.ProcessingTimeLogInterceptor;
@@ -47,10 +49,12 @@ import com.packt.webstore.service.AdminService;
 import com.packt.webstore.service.NoticeService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
+import com.packt.webstore.service.UserService;
 import com.packt.webstore.service.impl.AdminServiceImpl;
 import com.packt.webstore.service.impl.NoticeServiceImpl;
 import com.packt.webstore.service.impl.StudentServiceImpl;
 import com.packt.webstore.service.impl.SupervisorServiceImpl;
+import com.packt.webstore.service.impl.UserServiceImpl;
 import com.packt.webstore.validator.ProductValidator;
 import com.packt.webstore.validator.UnitsInStockValidator;
 
@@ -218,4 +222,15 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	public NoticeService noticeService() {
 		return new NoticeServiceImpl();
 	}
+
+	@Bean
+	NoticeRepository noticeRepository() {
+		return new NoticeRepositoryImpl();
+	}
+	
+	@Bean
+	public UserService userService() {
+		return new UserServiceImpl();
+	}
+	
 }

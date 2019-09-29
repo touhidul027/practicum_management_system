@@ -9,6 +9,7 @@ public interface NoticeService {
 public abstract	boolean saveNotice(NoticeDTO noticeDTO);
 public abstract NoticeDTO getNotice(int noticeId);
 public abstract TreeMap<Long,NoticeDTO> getNotices(String userEmail);
+public abstract TreeMap<Long,NoticeDTO> getNotices(int publisherId);
 public abstract boolean deleteNotice(int noticeId);
 
 }

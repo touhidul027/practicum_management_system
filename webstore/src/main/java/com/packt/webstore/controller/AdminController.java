@@ -73,7 +73,6 @@ public class AdminController {
 	public String notice(HttpServletRequest req,Model model,Principal principal ) {
 		NoticeDTO noticeDTO = new NoticeDTO();
 		noticeDTO.setFrom(principal.getName());
-		noticeDTO.setNoticeId(0);
 		model.addAttribute("noticeDTO", noticeDTO);
 		return "admin/notice";
 	}
@@ -81,6 +80,8 @@ public class AdminController {
 	@RequestMapping(value = "/notice", method = RequestMethod.POST)
 	public String saveNotice(Model model, Principal principal, @ModelAttribute("noticeDTO") NoticeDTO noticeDTO) {
 		System.out.println(noticeDTO);
+		noticeDTO.setNoticeId(1001);
+		noticeDTO.setPublisherId(1510);
 		boolean flag=noticeService.saveNotice(noticeDTO);
 		
 		return "redirect:/admin/notice";

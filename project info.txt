@@ -67,7 +67,7 @@ dept. administrator
 	5.3 Make Ajax call
 	5.4 hit controller,service,repository
 	5.5 Back that student from the controller to web page
-*6. Admin can Send Notice to respective User
+6. Admin can Send Notice to respective User
 	6.1 Creating Notice jsp page,notice.jsp-done
     6.2 Creating Notice.java domain object
 	6.3 Creating a NoticeDTO in DTO package
@@ -75,9 +75,30 @@ dept. administrator
     6.4 Create NoticeService bean in controller
 	6.5 Make NoticeService interface,concrete implementation NoticeServiceImpl
 	6.5 Make NoticeService bean available in the context
+    6.6 Create NoticeRepository,NoticeRepositoryImpl
+	6.7 Make bean available in the context,also define this bean at service class	
+	6.8 Create saveNotice method,extract data from dto to domain object
+	6.9 Create database table 'notices' and 'notice_reciever'
+    6.10 IMplement the repository method save
+	6.11 Done
+
+*7. Admin can read all the sent notice to users
+7.1 Click on sent link
+7.2 Onclick method will be called
+7.3 Ajax call will be made
+7.4 Invoke notice rest controller
+7.5 Get the username from principal object,get the id from there using userService bean
+7.6 Create a user service,notice service bean
+7.7 Available those in bean context
+7.8 Make a notice repository bean inside notice serviceImpl class
+7.9 Available notice serviceImpl in bean context
+7.10 create read method in the repositoryImpl
+7.11 Available the jdbcTemplate bean in it.
+7.12 return the result
+7.13 show it in UI display
+7.14 done
 
 
-	
 Actor : Student
 ------------------
 1. Student can see his profile information

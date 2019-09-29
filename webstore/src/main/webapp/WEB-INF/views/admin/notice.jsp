@@ -25,7 +25,7 @@
 	  
 	  function targetStudents() {   	 
 		   document.getElementById("target").value = "Only All students will get this notice ";  	  
-		   document.getElementById("recipent").style.display="";
+		   document.getElementById("reci                                                                      pent").style.display="";
 		   document.getElementById("toId").value = "Students";
 	  }
 	  
@@ -45,7 +45,22 @@
 		   document.getElementById("target").value = "Particular supervisor and his students will get this notice.Provide Supervisor ID";  	  
 		   document.getElementById("recipent").style.display="";
 		   document.getElementById("toId").value = "";
-	  }    
+	  }
+	  
+	  function sentUrl() {
+		  $.ajax({
+  	        type: "post",
+  	        url: "http://localhost:8080/webstore/rest/notice/get/all",
+  	        cache: false,    
+  	        success: function(student){  
+  	        	 console.log("called been successfull");
+  	        },
+  	        error: function(){
+  	         alert('Error while request..');
+  	        }
+  	       });
+	  }
+	  
   </script>
   
 </head>
@@ -54,6 +69,30 @@
 <!-- add header part  ? which lib iis used-->
 <jsp:include page="header.jsp"></jsp:include>
 <br><br>
+
+<c:url var="urlSent" value="/notice/get/all" />
+
+<div class="container" > 
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">        
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Inbox <span class="sr-only">(current)</span></a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="" onclick="sentUrl();" > ">Sent <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">Compose <span class="sr-only">(current)</span></a>
+      </li>     
+    </ul>
+  </div>
+</nav>
+</div>
+
+<br>
+<br>
+
 <div class="container" >
 <div class="card" style="width: 40rem;">
 
