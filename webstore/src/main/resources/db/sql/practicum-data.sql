@@ -13,5 +13,6 @@ INSERT INTO supervisors VALUES
 	(9990104, 'Shaheen Alam','9990104@iubat.edu','CSE'),
 	(9990105, 'homayon kabir','9990105@iubat.edu','CSE');
 
-INSERT INTO notices VALUES (102,1511,'All',1349333576093,'Meeting with Co Supervisor','All students need to meet supervisor within October 10');
+INSERT INTO notices VALUES (102,1510,'All',1349333576093,'Meeting with Co Supervisor','All students need to meet supervisor within October 10'),
+(103,1510,'All',1549333576093,'Meeting for VC','All students need to seat for viva with VC');
 

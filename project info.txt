@@ -82,21 +82,21 @@ dept. administrator
     6.10 IMplement the repository method save
 	6.11 Done
 
-*7. Admin can read all the sent notice to users
-7.1 Click on sent link
-7.2 Onclick method will be called
-7.3 Ajax call will be made
-7.4 Invoke notice rest controller
-7.5 Get the username from principal object,get the id from there using userService bean
-7.6 Create a user service,notice service bean
-7.7 Available those in bean context
-7.8 Make a notice repository bean inside notice serviceImpl class
-7.9 Available notice serviceImpl in bean context
-7.10 create read method in the repositoryImpl
-7.11 Available the jdbcTemplate bean in it.
-7.12 return the result
-7.13 show it in UI display
-7.14 done
+7. Admin can read all the sent notice to users
+	7.1 Click on sent link
+	7.2 Onclick method will be called
+	7.3 Controller call will be made
+	7.4 Invoke notice controller
+	7.5 Get the username from principal object,get the id from there using userService bean
+	7.6 Create a user service,notice service bean
+	7.7 Available those in bean context
+	7.8 Make a notice repository bean inside notice serviceImpl class
+	7.9 Available notice serviceImpl in bean context
+	7.10 create read method in the repositoryImpl
+	7.11 Available the jdbcTemplate bean in it.
+	7.12 return the result in map
+	7.13 show it in UI display
+	7.14 done
 
 
 Actor : Student

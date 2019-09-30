@@ -25,7 +25,7 @@
 	  
 	  function targetStudents() {   	 
 		   document.getElementById("target").value = "Only All students will get this notice ";  	  
-		   document.getElementById("reci                                                                      pent").style.display="";
+		   document.getElementById("recipent").style.display="";
 		   document.getElementById("toId").value = "Students";
 	  }
 	  
@@ -46,21 +46,6 @@
 		   document.getElementById("recipent").style.display="";
 		   document.getElementById("toId").value = "";
 	  }
-	  
-	  function sentUrl() {
-		  $.ajax({
-  	        type: "post",
-  	        url: "http://localhost:8080/webstore/rest/notice/get/all",
-  	        cache: false,    
-  	        success: function(student){  
-  	        	 console.log("called been successfull");
-  	        },
-  	        error: function(){
-  	         alert('Error while request..');
-  	        }
-  	       });
-	  }
-	  
   </script>
   
 </head>
@@ -70,9 +55,9 @@
 <jsp:include page="header.jsp"></jsp:include>
 <br><br>
 
-<c:url var="urlSent" value="/notice/get/all" />
+<c:url var="getNoticesURL" value="/notice/all"/>
 
-<div class="container" > 
+<div class="container" id="" > 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">        
@@ -80,7 +65,7 @@
         <a class="nav-link" href="#">Inbox <span class="sr-only">(current)</span></a>
       </li>
        <li class="nav-item">
-        <a class="nav-link" href="" onclick="sentUrl();" > ">Sent <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="${getNoticesURL}"> Sent <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Compose <span class="sr-only">(current)</span></a>
@@ -96,7 +81,7 @@
 <div class="container" >
 <div class="card" style="width: 40rem;">
 
-<div class="input-group mb-3">
+<div class="input-group mb-3 group">
   <div class="input-group-prepend">
     <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select</button>
     <div class="dropdown-menu targetClass">
@@ -117,7 +102,7 @@
 </div>
 <br><br>
 
-<div class="container" >
+<div class="container group" >
 <div class="card" style="">
 <c:url var="url" value="/admin/notice" />
 
@@ -151,8 +136,6 @@
                 </tr>
             </table>
         </form:form>
-        
-
 </div>
 </div>
 

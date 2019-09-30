@@ -1,5 +1,6 @@
 package com.packt.webstore.service.impl;
 
+import java.util.List;
 import java.util.TreeMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,23 +14,23 @@ import com.packt.webstore.service.NoticeService;
 @Service
 public class NoticeServiceImpl implements NoticeService {
 
-	@Autowired 
-	NoticeRepository noticeRepository ; 
-	
+	@Autowired
+	NoticeRepository noticeRepository;
+
 	@Override
 	public boolean saveNotice(NoticeDTO noticeDTO) {
-    // save the notice to db
-		Notice notice = new Notice(); 
+		// save the notice to db
+		Notice notice = new Notice();
 		notice.setNoticeId(1001);
 		notice.setPublisherId(noticeDTO.getPublisherId());
 		notice.setPublishTime(System.currentTimeMillis());
-        notice.setReceiver(noticeDTO.getToId());
-        notice.setSubject(noticeDTO.getSubject());
-        notice.setDescription(noticeDTO.getDescription());
-        System.out.println(notice);
+		notice.setReceiver(noticeDTO.getToId());
+		notice.setSubject(noticeDTO.getSubject());
+		notice.setDescription(noticeDTO.getDescription());
+		System.out.println(notice);
 		noticeRepository.saveNotice(notice);
-		
-    //email the notice to corresponding users
+
+		// email the notice to corresponding users
 		return true;
 	}
 
@@ -53,8 +54,21 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public TreeMap<Long, NoticeDTO> getNotices(int publisherId) {
-		// TODO Auto-generated method stub
-		return null;
+
+		List<Notice> notices = noticeRepository.getNotices(publisherId);
+		TreeMap<Long, NoticeDTO> noticeDTOs = new TreeMap<>();
+
+		for (Notice m : notices) {
+			NoticeDTO dto = new NoticeDTO();
+			dto.setPublisherId(publisherId);
+			dto.setNoticeId(m.getNoticeId());
+			dto.setSubject(m.getSubject());
+			dto.setToId(m.getReceiver());
+			dto.setDescription(m.getDescription());
+			noticeDTOs.put(m.getPublish_time(), dto);
+		}
+
+		return noticeDTOs;
 	}
 
 }

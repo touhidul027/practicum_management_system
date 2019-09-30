@@ -26,9 +26,9 @@ public class NoticeRestController {
 	@RequestMapping(value = "/all", method = RequestMethod.GET)
 	public Map<Long, NoticeDTO> getSentNotices(Principal principal) {
 		String email = principal.getName();
-		int publisherId = userService.getUserId(email);
+		int publisherId = userService.getUserId(email);//hard-coded
 		Map<Long, NoticeDTO> noticeDTOs = noticeService.getNotices(publisherId);
-		return null;
+		return noticeDTOs;
 	}
 
 }

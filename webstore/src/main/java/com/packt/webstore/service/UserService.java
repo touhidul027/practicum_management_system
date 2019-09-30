@@ -1,9 +1,9 @@
 package com.packt.webstore.service;
 
-import java.util.Map;
+import org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestWrapper;
 
-import com.packt.webstore.dto.NoticeDTO;
 
 public interface UserService {
   public abstract int getUserId(String userName);
+  public abstract String getViewFolderName(SecurityContextHolderAwareRequestWrapper request);
 }
