@@ -81,7 +81,17 @@ dept. administrator
 	6.9 Create database table 'notices' and 'notice_reciever'
     6.10 IMplement the repository method save
 	6.11 Done
-
+	6.12 Sending email along with saving notice in database
+	  6.12.1 Help found on : https://www.baeldung.com/spring-email
+    6.13 Provide maven dependency information in pom.xml
+    6.14 Make JavaMailSender bean available in web application
+    6.15 Create EmailService to service package
+    6.16 Create EmailServiceImpl to serviceImpl package
+    6.17 Make EmailService bean implementation available in the context
+    6.18 Implement private static inner class to get JavaMailSender instance inside EmailServiceImpl
+    6.19 Provided password hard-coded for now
+	6.20 Done
+	
 7. Admin can read all the sent notice to users
 	7.1 Click on sent link
 	7.2 Onclick method will be called

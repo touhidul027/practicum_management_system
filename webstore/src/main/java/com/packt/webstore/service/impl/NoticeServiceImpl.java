@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.packt.webstore.domain.Notice;
 import com.packt.webstore.domain.repository.NoticeRepository;
 import com.packt.webstore.dto.NoticeDTO;
+import com.packt.webstore.service.EmailService;
 import com.packt.webstore.service.NoticeService;
 
 @Service
@@ -16,6 +17,9 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Autowired
 	NoticeRepository noticeRepository;
+
+	@Autowired
+	EmailService emailService;
 
 	@Override
 	public boolean saveNotice(NoticeDTO noticeDTO) {
@@ -30,7 +34,12 @@ public class NoticeServiceImpl implements NoticeService {
 		System.out.println(notice);
 		noticeRepository.saveNotice(notice);
 
+		// get who will get mail notifications
+
 		// email the notice to corresponding users
+		emailService.sendMail(noticeDTO.getFrom(), noticeDTO.getMailPassword(), "academicstudy0001cplus@gmail.com",
+				noticeDTO.getSubject(), noticeDTO.getDescription());
+
 		return true;
 	}
 

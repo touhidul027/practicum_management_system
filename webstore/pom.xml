@@ -95,5 +95,19 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.2.4.Final</version>
 		</dependency>
+		<!-- for mail purpose -->
+		<dependency>
+		  <groupId>com.sun.mail</groupId>
+          <artifactId>javax.mail</artifactId>
+          <version>1.6.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context-support</artifactId>
+            <version>4.0.1.RELEASE</version>
+        </dependency>
+        <!-- for mail purpose -->
+        
 	</dependencies>
 </project>

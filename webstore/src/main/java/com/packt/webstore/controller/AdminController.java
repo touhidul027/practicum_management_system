@@ -82,6 +82,10 @@ public class AdminController {
 		System.out.println(noticeDTO);
 		noticeDTO.setNoticeId(1001);
 		noticeDTO.setPublisherId(1510);
+		//noticeDTO.setFrom("academicstudy0001cplus@gmail.com");
+		noticeDTO.setFrom("15103199@iubat.edu");//working- cause,no 2 factor authentication
+		//providing password here
+		noticeDTO.setMailPassword("");//working- cause,no 2 factor authentication
 		boolean flag=noticeService.saveNotice(noticeDTO);
 		
 		return "redirect:/admin/notice";

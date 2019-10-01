@@ -3,6 +3,7 @@ package com.packt.webstore.config;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Locale;
+import java.util.Properties;
 import java.util.Set;
 
 import org.springframework.context.MessageSource;
@@ -10,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
@@ -46,11 +49,13 @@ import com.packt.webstore.domain.repository.impl.SupervisorRepositoryImpl;
 import com.packt.webstore.interceptor.ProcessingTimeLogInterceptor;
 import com.packt.webstore.interceptor.PromoCodeInterceptor;
 import com.packt.webstore.service.AdminService;
+import com.packt.webstore.service.EmailService;
 import com.packt.webstore.service.NoticeService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
 import com.packt.webstore.service.UserService;
 import com.packt.webstore.service.impl.AdminServiceImpl;
+import com.packt.webstore.service.impl.EmailServiceImpl;
 import com.packt.webstore.service.impl.NoticeServiceImpl;
 import com.packt.webstore.service.impl.StudentServiceImpl;
 import com.packt.webstore.service.impl.SupervisorServiceImpl;
@@ -227,10 +232,33 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	NoticeRepository noticeRepository() {
 		return new NoticeRepositoryImpl();
 	}
-	
+
 	@Bean
 	public UserService userService() {
 		return new UserServiceImpl();
 	}
-	
+
+	@Bean
+	public JavaMailSender getJavaMailSender() {
+		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+		mailSender.setHost("smtp.gmail.com");
+		mailSender.setPort(587);
+
+		mailSender.setUsername("my.gmail@gmail.com");
+		mailSender.setPassword("password");
+
+		Properties props = mailSender.getJavaMailProperties();
+		props.put("mail.transport.protocol", "smtp");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.starttls.enable", "true");
+		props.put("mail.debug", "true");
+
+		return mailSender;
+	}
+
+	@Bean
+	public EmailService emailService() {
+		return new EmailServiceImpl();
+	}
+
 }
