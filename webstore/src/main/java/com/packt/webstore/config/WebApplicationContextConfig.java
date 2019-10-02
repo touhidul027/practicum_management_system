@@ -42,6 +42,9 @@ import com.packt.webstore.domain.repository.AdminRepository;
 import com.packt.webstore.domain.repository.NoticeRepository;
 import com.packt.webstore.domain.repository.StudentRepository;
 import com.packt.webstore.domain.repository.SupervisorRepository;
+import com.packt.webstore.domain.repository.graph.CanvasjsChartDao;
+import com.packt.webstore.domain.repository.graph.impl.CanvasjsChartDaoImpl;
+import com.packt.webstore.domain.repository.graph.impl.ChartRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.AdminRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.NoticeRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.StudentRepositoryImpl;
@@ -54,6 +57,10 @@ import com.packt.webstore.service.NoticeService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
 import com.packt.webstore.service.UserService;
+import com.packt.webstore.service.graph.CanvasjsChartService;
+import com.packt.webstore.service.graph.ChartService;
+import com.packt.webstore.service.graph.impl.CanvasjsChartServiceImpl;
+import com.packt.webstore.service.graph.impl.ChartServiceImpl;
 import com.packt.webstore.service.impl.AdminServiceImpl;
 import com.packt.webstore.service.impl.EmailServiceImpl;
 import com.packt.webstore.service.impl.NoticeServiceImpl;
@@ -62,6 +69,7 @@ import com.packt.webstore.service.impl.SupervisorServiceImpl;
 import com.packt.webstore.service.impl.UserServiceImpl;
 import com.packt.webstore.validator.ProductValidator;
 import com.packt.webstore.validator.UnitsInStockValidator;
+import com.packt.webstore.domain.repository.graph.ChartRepository;
 
 @Configuration
 @EnableWebMvc
@@ -261,4 +269,23 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 		return new EmailServiceImpl();
 	}
 
+	@Bean
+	public CanvasjsChartService CanvasjsChartService() {
+		return new CanvasjsChartServiceImpl();
+	}
+	
+	@Bean
+	public CanvasjsChartDao canvasjsChartDao() {
+		return new CanvasjsChartDaoImpl();
+	}
+	
+	@Bean
+	public ChartService chartService() {
+		return new ChartServiceImpl();
+	}
+	
+	@Bean
+	public ChartRepository ChartRepository() {
+		return new ChartRepositoryImpl();
+	}
 }

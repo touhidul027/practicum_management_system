@@ -108,6 +108,14 @@ dept. administrator
 	7.13 show it in UI display
 	7.14 done
 
+8. Admin can view total students performance through graph
+	8.1 Help link : https://canvasjs.com/spring-mvc-charts/pie-chart/ 
+	8.1 Creating a jsp file that can load graph with students data,must import scripting library
+	8.2 In controller create ChartService.java and its implementation and available the service bean in the 
+	    context
+	8.3 Creating ChartRepository and its implementation,also available bean at web context.
+	8.4 return result
+	8.5 Done
 
 Actor : Student
 ------------------

@@ -2,12 +2,14 @@ package com.packt.webstore.controller;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,6 +22,8 @@ import com.packt.webstore.service.DeptAdminService;
 import com.packt.webstore.service.NoticeService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
+import com.packt.webstore.service.graph.CanvasjsChartService;
+import com.packt.webstore.service.graph.ChartService;
 import com.packt.webstore.service.impl.DeptAdminServiceImpl;
 
 @Controller
@@ -32,7 +36,10 @@ public class AdminController {
 	SupervisorService supervisorService;
 	
 	@Autowired 
-	NoticeService noticeService ; 
+	NoticeService noticeService ;
+	
+	@Autowired
+	private ChartService chartService;
 
 	@RequestMapping(value = "/students", method = RequestMethod.GET)
 	public String studentsPage(Model model) {
@@ -60,7 +67,10 @@ public class AdminController {
 	}
 
 	@RequestMapping(value = "/studentPerformance", method = RequestMethod.GET)
-	public String studentPerformance() {
+	public String studentPerformance(ModelMap modelMap) {
+		List<List<Map<Object, Object>>> canvasjsDataList = chartService.getChartData();
+		modelMap.addAttribute("dataPointsList", canvasjsDataList);
+		
 		return "admin/studentPerformance";
 	}
 

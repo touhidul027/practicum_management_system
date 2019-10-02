@@ -40,7 +40,7 @@
       </li>
 	  
       <li class="nav-item">
-        <a class="nav-link"  href="<c:url value="/admin/studentPerformance"/>" >Student Performance</a>
+        <a class="nav-link"  href="<c:url value="/admin/studentPerformance"/>" >Students Performance</a>
       </li>
 	  
 	  <li class="nav-item">
