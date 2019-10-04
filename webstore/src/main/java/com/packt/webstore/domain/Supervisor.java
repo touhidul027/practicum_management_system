@@ -1,6 +1,11 @@
 package com.packt.webstore.domain;
 
 public class Supervisor {
+	@Override
+	public String toString() {
+		return "Supervisor [supervisorId=" + supervisorId + ", userName=" + userName + ", email=" + email
+				+ ", department=" + department + "]";
+	}
 	private int supervisorId;
 	private String userName;
     private String email;

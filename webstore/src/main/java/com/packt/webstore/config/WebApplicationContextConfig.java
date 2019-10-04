@@ -42,6 +42,7 @@ import com.packt.webstore.domain.repository.AdminRepository;
 import com.packt.webstore.domain.repository.NoticeRepository;
 import com.packt.webstore.domain.repository.StudentRepository;
 import com.packt.webstore.domain.repository.SupervisorRepository;
+import com.packt.webstore.domain.repository.UserRepository;
 import com.packt.webstore.domain.repository.graph.CanvasjsChartDao;
 import com.packt.webstore.domain.repository.graph.impl.CanvasjsChartDaoImpl;
 import com.packt.webstore.domain.repository.graph.impl.ChartRepositoryImpl;
@@ -49,6 +50,7 @@ import com.packt.webstore.domain.repository.impl.AdminRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.NoticeRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.StudentRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.SupervisorRepositoryImpl;
+import com.packt.webstore.domain.repository.impl.UserRepositoryImpl;
 import com.packt.webstore.interceptor.ProcessingTimeLogInterceptor;
 import com.packt.webstore.interceptor.PromoCodeInterceptor;
 import com.packt.webstore.service.AdminService;
@@ -244,6 +246,11 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public UserService userService() {
 		return new UserServiceImpl();
+	}
+	
+	@Bean
+	public UserRepository userRepository() {
+		return new UserRepositoryImpl();
 	}
 
 	@Bean

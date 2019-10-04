@@ -1,13 +1,12 @@
-Admin :
-University-Register :
-Department - co ordinator :
-Department-administrator :
-Super-visor :
-Student : 
+Actors:
+1.Department Administrator
+2.Department Co-ordinator
+3.Supervisor
+4.Student
 
-Functional Requirements List:
+Functional Requirements List Along with system Requirement:
 
-dept. administrator
+Department Administrator
 --------------------
 1.he can create supervisor account
 	1.1 supervisor could sent a demo request to dept. administrator
@@ -128,9 +127,14 @@ Actor : Student
 	7.5 Creating Controller method,service method,repository method.
 	7.6 Done
 3.Student can see supervisor imformation
- 3.1 Click on supervisor nav-link,going to student controller,get the supervisor from
- respective reposiroty,back the model object on view page.
-
-
-
+ 3.1 Click on supervisor nav-link,
+ 3.2 Create a jsp page supervisor.jsp in student folder
+ 3.2 Going to student controller,get the supervisor from
+     respective reposiroty,back the model object on view page.
+4.Can submit project proposals to supervisor
+5.Can submit log evaluation form,view the status
+6.Can make report by selecting software process model,can update report continuously
+7.Can read notice
+8.Can chat with supervisor and with dept. Administrator
+9.Can see the own performance dynamically
 

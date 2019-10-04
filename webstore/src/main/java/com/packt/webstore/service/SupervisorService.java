@@ -11,6 +11,8 @@ public interface SupervisorService {
 	
 	public List<Supervisor> getSupervisorsExcept(int supervisorId);
 
-	public Supervisor getSupervisorByUserName(String supervisorUserName); 
+	public Supervisor getSupervisorByUserName(String supervisorUserName);
+
+	public Supervisor getStudentSupervisor(int studentId);
 
 }

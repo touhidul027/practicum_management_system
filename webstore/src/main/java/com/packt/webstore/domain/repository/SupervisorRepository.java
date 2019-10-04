@@ -10,4 +10,8 @@ public interface SupervisorRepository {
 	public Supervisor getSupervisor(int id);
 
 	public Supervisor getSupervisorByUserName(String supervisorUserName);
+
+	public Supervisor getSupervisorByStudentId(int studentId);
+
+	public Supervisor getStudentSupervisor(int studentId);
 }

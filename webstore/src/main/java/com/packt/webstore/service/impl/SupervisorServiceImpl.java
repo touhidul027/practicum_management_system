@@ -2,14 +2,15 @@ package com.packt.webstore.service.impl;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.packt.webstore.domain.Supervisor;
+ import com.packt.webstore.domain.Supervisor;
 import com.packt.webstore.domain.repository.SupervisorRepository;
-import com.packt.webstore.domain.repository.impl.SupervisorRepositoryImpl;
-import com.packt.webstore.service.SupervisorService;
+ import com.packt.webstore.service.SupervisorService;
 
 public class SupervisorServiceImpl implements SupervisorService{
+	private static final Logger logger = Logger.getLogger(SupervisorServiceImpl.class);
 
 	@Autowired
 	private SupervisorRepository supervisorRepository;
@@ -40,6 +41,13 @@ public class SupervisorServiceImpl implements SupervisorService{
 	@Override
 	public Supervisor getSupervisorByUserName(String supervisorUserName) {	
 		return supervisorRepository.getSupervisorByUserName(supervisorUserName);
+	}
+
+	@Override
+	public Supervisor getStudentSupervisor(int studentId) {
+		Supervisor supervisor=supervisorRepository.getStudentSupervisor( studentId);
+		logger.info(supervisor);
+		return supervisor;
 	}
 
 }

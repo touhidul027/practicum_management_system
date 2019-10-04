@@ -5,5 +5,6 @@ import org.springframework.security.web.servletapi.SecurityContextHolderAwareReq
 
 public interface UserService {
   public abstract int getUserId(String userName);
+  public abstract int getUserId(String userName,SecurityContextHolderAwareRequestWrapper request);
   public abstract String getViewFolderName(SecurityContextHolderAwareRequestWrapper request);
 }

@@ -9,6 +9,7 @@
  </div>
 </div>
 
+<c:url var="urlGetSupervisor" value="/student/supervisor" />
 
 <div class="container" >
  
@@ -21,7 +22,7 @@
     <ul class="navbar-nav">
 	  
 	  <li class="nav-item">
-          <a  class="nav-link"  href="<c:url value="/stduent/supervisor" />">Supervisor Info</a>
+          <a  class="nav-link"  href="${urlGetSupervisor}">Supervisor Info</a>
       </li>
       
 	  <li class="nav-item dropdown">

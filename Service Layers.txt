@@ -1,0 +1,38 @@
+AdminService 
+List<Supervisor> getSupervisorsExcept(int supervisorId);
+ChangeSupervisorDTO getChangeSupervisorDTO(int studentId);
+ChangeSupervisorDTO changeSupervisor(int parseInt, int parseInt2);
+
+DeptAdminService
+Student getStudent(int id);
+
+EmailService
+void sendMail(String senderMail, String senderPassword, String to, String subject, String text);
+void sendSimpleMessage(String to, String subject, String text);
+void sendMessageWithAttachment(String to, String subject, String text, String pathToAttachment);
+
+NoticeService
+boolean saveNotice(NoticeDTO noticeDTO);
+NoticeDTO getNotice(int noticeId);
+TreeMap<Long,NoticeDTO> getNotices(String userEmail);
+TreeMap<Long,NoticeDTO> getNotices(int publisherId);
+boolean deleteNotice(int noticeId);
+
+StudentService
+ Student getStudentById(int id) ;
+ List<Student> getStudents();
+ abstract Supervisor getStudentSupervisor(int studentId);
+ boolean registerStudent(int studentId, String studentName, String studentEmail, String department);
+ Student getStudentByEmail(String userEmail);
+ boolean updateStudent(int studentId, String cellPhone, String password);
+
+SupervisorService
+	 List<Supervisor> getSupervisors();
+	 Supervisor getSupervisor(int parseInt);
+	 List<Supervisor> getSupervisorsExcept(int supervisorId);
+	 Supervisor getSupervisorByUserName(String supervisorUserName);
+	 Supervisor getSupervisorByStudentId(int studentId); 
+
+UserService
+    int getUserId(String userName);
+    String getViewFolderName(SecurityContextHolderAwareRequestWrapper request);

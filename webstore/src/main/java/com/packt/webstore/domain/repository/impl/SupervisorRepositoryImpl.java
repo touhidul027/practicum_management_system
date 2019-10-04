@@ -6,14 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.packt.webstore.domain.Supervisor;
 import com.packt.webstore.domain.repository.SupervisorRepository;
+import com.packt.webstore.service.impl.SupervisorServiceImpl;
 
 public class SupervisorRepositoryImpl implements SupervisorRepository {
+	private static final Logger logger = Logger.getLogger(SupervisorRepositoryImpl.class);
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -47,6 +50,20 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 		return supervisor;
 	}
 
+	@Override
+	public Supervisor getStudentSupervisor(int studentId) {
+		logger.info(this);
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("studentId", studentId);
+
+		Integer supervisorId = jdbcTemplate
+				.queryForObject("SELECT supervisor_id FROM students WHERE student_id=:studentId", param, Integer.class);
+		logger.info(supervisorId);
+		Supervisor supervisor = getSupervisor(supervisorId);
+		logger.info(supervisor);
+		return supervisor;
+	}
+
 	private static final class SupervisorRowMapper implements RowMapper<Supervisor> {
 		@Override
 		public Supervisor mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -58,4 +75,11 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 			return supervisor;
 		}
 	}
+
+	@Override
+	public Supervisor getSupervisorByStudentId(int studentId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
