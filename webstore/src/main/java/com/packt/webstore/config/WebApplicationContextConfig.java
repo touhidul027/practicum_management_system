@@ -40,6 +40,7 @@ import org.springframework.web.util.UrlPathHelper;
 import com.packt.webstore.domain.Product;
 import com.packt.webstore.domain.repository.AdminRepository;
 import com.packt.webstore.domain.repository.NoticeRepository;
+import com.packt.webstore.domain.repository.ProjectProposalRepository;
 import com.packt.webstore.domain.repository.StudentRepository;
 import com.packt.webstore.domain.repository.SupervisorRepository;
 import com.packt.webstore.domain.repository.UserRepository;
@@ -48,6 +49,7 @@ import com.packt.webstore.domain.repository.graph.impl.CanvasjsChartDaoImpl;
 import com.packt.webstore.domain.repository.graph.impl.ChartRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.AdminRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.NoticeRepositoryImpl;
+import com.packt.webstore.domain.repository.impl.ProjectProposalRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.StudentRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.SupervisorRepositoryImpl;
 import com.packt.webstore.domain.repository.impl.UserRepositoryImpl;
@@ -66,12 +68,14 @@ import com.packt.webstore.service.graph.impl.ChartServiceImpl;
 import com.packt.webstore.service.impl.AdminServiceImpl;
 import com.packt.webstore.service.impl.EmailServiceImpl;
 import com.packt.webstore.service.impl.NoticeServiceImpl;
+import com.packt.webstore.service.impl.ProjectProposalServiceImpl;
 import com.packt.webstore.service.impl.StudentServiceImpl;
 import com.packt.webstore.service.impl.SupervisorServiceImpl;
 import com.packt.webstore.service.impl.UserServiceImpl;
 import com.packt.webstore.validator.ProductValidator;
 import com.packt.webstore.validator.UnitsInStockValidator;
 import com.packt.webstore.domain.repository.graph.ChartRepository;
+import com.packt.webstore.service.ProjectProposalService;
 
 @Configuration
 @EnableWebMvc
@@ -294,5 +298,15 @@ public class WebApplicationContextConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ChartRepository ChartRepository() {
 		return new ChartRepositoryImpl();
+	}
+	
+	@Bean
+	public ProjectProposalService ProjectProposalService() {
+		return new ProjectProposalServiceImpl();
+	}
+	
+	 @Bean
+	public ProjectProposalRepository projectProposalRepository() {
+		return new ProjectProposalRepositoryImpl();
 	}
 }

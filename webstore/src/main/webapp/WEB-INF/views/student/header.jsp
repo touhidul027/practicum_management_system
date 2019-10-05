@@ -10,6 +10,7 @@
 </div>
 
 <c:url var="urlGetSupervisor" value="/student/supervisor" />
+<c:url var="urlProjectProposal" value="/student/projectProposal" />
 
 <div class="container" >
  
@@ -23,6 +24,10 @@
 	  
 	  <li class="nav-item">
           <a  class="nav-link"  href="${urlGetSupervisor}">Supervisor Info</a>
+      </li>
+      
+      <li class="nav-item">
+          <a  class="nav-link"  href="${urlProjectProposal}">Project Proposal</a>
       </li>
       
 	  <li class="nav-item dropdown">

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.packt.webstore.domain.ProjectProposal;
 import com.packt.webstore.domain.Student;
 import com.packt.webstore.domain.Supervisor;
 import com.packt.webstore.service.StudentService;
@@ -69,6 +70,14 @@ public class StudentController {
 		return getFullViewName("supervisor");
 	}
 
+	@RequestMapping(value = "/projectProposal", method = RequestMethod.GET)
+	public String getProjectProposal(Model model) {
+		ProjectProposal projectProposal = new ProjectProposal();
+		logger.info(projectProposal);
+		model.addAttribute("projectProposal", projectProposal);
+		return getFullViewName("proposal");
+	}
+	
 	public String getFullViewName(String viewName) {
 		return "student/" + viewName;
 	}
