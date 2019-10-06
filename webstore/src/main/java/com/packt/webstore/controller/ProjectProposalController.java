@@ -19,7 +19,7 @@ import com.packt.webstore.service.StudentService;
 @Controller
 @RequestMapping("/project/proposal")
 public class ProjectProposalController {
-	private static final Logger logger = Logger.getLogger(StudentController.class);
+	private static final Logger logger = Logger.getLogger(ProjectProposalController.class);
 
 	@Autowired
 	ProjectProposalService projectProposalService;
@@ -40,7 +40,7 @@ public class ProjectProposalController {
 		Student student = studentService.getStudentByEmail(principal.getName());
 		logger.info(student);
 		Supervisor supervisor = studentService.getStudentSupervisor(student.getStudentId());
-		logger.info(supervisor);
+		logger.debug(supervisor);
 		logger.info("performing saving project proposal information.");
 		boolean flag = projectProposalService.saveprojectProposal(student.getStudentId(), supervisor.getSupervisorId(),
 				projectProposal);

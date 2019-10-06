@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.packt.webstore.domain.ProjectProposal;
+import com.packt.webstore.domain.ProposalStatus;
 import com.packt.webstore.domain.Student;
 import com.packt.webstore.domain.Supervisor;
+import com.packt.webstore.dto.ProjectProposalDto;
+import com.packt.webstore.service.ProjectProposalService;
 import com.packt.webstore.service.StudentService;
 import com.packt.webstore.service.SupervisorService;
 import com.packt.webstore.service.UserService;
@@ -32,7 +35,10 @@ public class StudentController {
 
 	@Autowired
 	UserService userService;
-
+	
+	@Autowired
+	ProjectProposalService projectProposalService;
+	
 	@RequestMapping(value = "/profile", method = RequestMethod.GET)
 	public String studentsPage(Model model, Principal principal) {
 		String userEmail = principal.getName();
@@ -71,11 +77,12 @@ public class StudentController {
 	}
 
 	@RequestMapping(value = "/projectProposal", method = RequestMethod.GET)
-	public String getProjectProposal(Model model) {
-		ProjectProposal projectProposal = new ProjectProposal();
-		logger.info(projectProposal);
-		model.addAttribute("projectProposal", projectProposal);
-		return getFullViewName("proposal");
+	public String getProjectProposal(Model model, Principal principal) {
+		Student student = studentService.getStudentByEmail(principal.getName());
+		logger.info(student);
+		ProjectProposalDto projectProposalDto = projectProposalService.getProjectProposalStatus(student.getStudentId());
+		logger.info(projectProposalDto);
+		return getFullViewName("waiting");
 	}
 	
 	public String getFullViewName(String viewName) {

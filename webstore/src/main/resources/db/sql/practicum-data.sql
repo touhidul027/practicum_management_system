@@ -19,6 +19,6 @@ INSERT INTO notices VALUES (102,1510,'All',1349333576093,'Meeting with Co Superv
 INSERT INTO project_proposals(tbl_id,student_id,supervisor_id, is_confirmed,first_sent_time,
 last_sent_time,revisions, supervisor_comment, project_title,project_for,project_doing_at, 
 objective,technological_stacks,modules,actors,functional_requirements)VALUES
-(DEFAULT,15103111,99900,1,1111,11111,1,'Supervisor Comment','Practicum Management System',
+(DEFAULT,15103199,9990101,0,1549333576093,1549333576093,1,'Supervisor Comment','Practicum Management System',
 'IUBAT','Square Dots','To perform practicum activity through software','java,spring',
 'module','actors','functional_requirements');
