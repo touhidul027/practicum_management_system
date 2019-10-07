@@ -82,6 +82,7 @@ public class ProjectProposalDto {
 	public void setFunctionalRequirements(String functionalRequirements) {
 		this.functionalRequirements = functionalRequirements;
 	}
+	
 	public boolean isConfirmed() {
 		return isConfirmed;
 	}

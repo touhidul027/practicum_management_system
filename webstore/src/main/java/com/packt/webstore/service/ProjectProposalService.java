@@ -10,4 +10,8 @@ public interface ProjectProposalService {
 
 	ProjectProposalDto getProjectProposalStatus(int studentId);
 
+	boolean saveprojectProposal(ProjectProposalDto projectProposalDto);
+
+	boolean updateProjectProposal(ProjectProposalDto projectProposalDto);
+
 }

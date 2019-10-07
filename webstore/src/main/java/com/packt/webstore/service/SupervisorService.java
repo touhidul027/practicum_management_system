@@ -7,7 +7,7 @@ import com.packt.webstore.domain.Supervisor;
 public interface SupervisorService {
 	public List<Supervisor> getSupervisors();
 
-	public Supervisor getSupervisor(int parseInt);
+	public Supervisor getSupervisor(long l);
 	
 	public List<Supervisor> getSupervisorsExcept(int supervisorId);
 

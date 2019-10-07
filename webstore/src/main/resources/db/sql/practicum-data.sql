@@ -1,6 +1,6 @@
 INSERT INTO students VALUES 
 	(15103199, 'Md. Touhidul Islam','15103199@iubat.edu','CSE',9990101,'',''),
-	(15103190, 'The Rock','15103190@iubat.edu','CSE',9990101,'',''),
+	(15103198, 'Kamrul Hasan','15103198@iubat.edu','CSE',9990101,'',''),
 	(15103191, 'Salman Khan','15103191@iubat.edu','CSE',9990102,'',''),
 	(15103192, 'Vin Diesel','15103192@iubat.edu','CSE',9990103,'',''),
 	(15103193, 'Shahid Afridi','15103193@iubat.edu','CSE',9990104,'',''),

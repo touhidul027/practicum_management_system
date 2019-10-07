@@ -21,7 +21,7 @@ public class SupervisorServiceImpl implements SupervisorService{
 	}
 
 	@Override
-	public Supervisor getSupervisor(int id) {
+	public Supervisor getSupervisor(long id) {
 		// TODO Auto-generated method stub
 		return supervisorRepository.getSupervisor(id);
 	}

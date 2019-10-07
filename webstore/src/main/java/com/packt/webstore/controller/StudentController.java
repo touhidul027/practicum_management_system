@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.packt.webstore.domain.ProjectProposal;
 import com.packt.webstore.domain.ProposalStatus;
@@ -23,6 +24,7 @@ import com.packt.webstore.service.SupervisorService;
 import com.packt.webstore.service.UserService;
 
 @Controller
+@SessionAttributes("projectProposalDto")
 @RequestMapping("/student")
 public class StudentController {
 	private static final Logger logger = Logger.getLogger(StudentController.class);
@@ -82,7 +84,18 @@ public class StudentController {
 		logger.info(student);
 		ProjectProposalDto projectProposalDto = projectProposalService.getProjectProposalStatus(student.getStudentId());
 		logger.info(projectProposalDto);
-		return getFullViewName("waiting");
+		ProposalStatus proposalStatus=projectProposalDto.getProposalStatus();
+		logger.info("proposalStatus : " + proposalStatus.toString());
+		model.addAttribute("projectProposalDto", projectProposalDto);
+		if(proposalStatus==ProposalStatus.CONFIRMED) {		
+			return getFullViewName("confirmedProposal");
+		}
+		return getFullViewName("proposal");
+	}
+	
+	@RequestMapping(value = "/thanks", method = RequestMethod.GET)
+	public String thanks(Model model, Principal principal) {
+		return getFullViewName("thanks");
 	}
 	
 	public String getFullViewName(String viewName) {

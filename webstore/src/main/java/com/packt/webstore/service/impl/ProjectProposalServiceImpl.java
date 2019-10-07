@@ -19,11 +19,11 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 	ProjectProposalRepository projectProposalRepository;
 
 	@Autowired
-	StudentRepository studentRepository ;
-	
+	StudentRepository studentRepository;
+
 	@Override
 	public boolean saveprojectProposal(int studentId, int supervisorId, ProjectProposal projectProposal) {
-		boolean flag = projectProposalRepository.saveprojectProposal(studentId,supervisorId,projectProposal);
+		boolean flag = projectProposalRepository.saveprojectProposal(studentId, supervisorId, projectProposal);
 		if (flag) {
 			logger.info(flag);
 		} else {
@@ -35,22 +35,56 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 	@Override
 	public ProjectProposalDto getProjectProposalStatus(int studentId) {
 		ProjectProposalDto projectProposalDto = new ProjectProposalDto();
-		projectProposalDto.setStudentId(studentId);
 		Supervisor supervisor = studentRepository.getStudentSupervisor(studentId);
-		int supervisorId = supervisor.getSupervisorId() ;
+		int supervisorId = supervisor.getSupervisorId();
 		logger.info(supervisorId);
 		projectProposalDto.setSupervisorId(supervisor.getSupervisorId());
-		ProposalStatus proposalStatus ;
+		ProposalStatus proposalStatus;
 		boolean isStudentProjectProposalExist = projectProposalRepository.isStudentProjectProposalExist(studentId);
-		if(isStudentProjectProposalExist) {
-			proposalStatus = ProposalStatus.EXIST;
+		if (isStudentProjectProposalExist) {
 			projectProposalDto = projectProposalRepository.getStudentProjectProposal(studentId);
-		}else {
+			if (projectProposalDto.isConfirmed()) {
+				proposalStatus = ProposalStatus.CONFIRMED;
+			} else {
+				proposalStatus = ProposalStatus.EXIST;
+			}
+			logger.info(proposalStatus);
+			projectProposalDto.setProposalStatus(proposalStatus);
+		} else {
 			proposalStatus = ProposalStatus.NOPROPOSALFOUND;
 			projectProposalDto.setProposalStatus(proposalStatus);
-			logger.info(projectProposalDto);
+			logger.info(proposalStatus);
 		}
+		logger.info("Supervisor ID " + supervisor.getSupervisorId() + " by studentRepository.");
+		logger.info("Supervisor ID " + projectProposalDto.getSupervisorId() + " by projectProposalDto.");
+		projectProposalDto.setStudentId(studentId);
+		logger.info(projectProposalDto);
 		return projectProposalDto;
+	}
+
+	@Override
+	public boolean saveprojectProposal(ProjectProposalDto projectProposalDto) {
+		projectProposalDto.setFirstLongTime(0); //first insertion
+		projectProposalDto.setLastLongTime(0);
+		boolean flag = projectProposalRepository.saveprojectProposal(projectProposalDto);
+		if (flag) {
+			logger.info("ProjectProposal Inserted : " + flag);
+		} else {
+			logger.error("ProjectProposal not inserted : " + flag);
+		}
+		return flag;
+	}
+
+	@Override
+	public boolean updateProjectProposal(ProjectProposalDto projectProposalDto) {
+		// TODO Auto-generated method stub
+		boolean flag = projectProposalRepository.updateProjectProposal(projectProposalDto);
+		if (flag) {
+			logger.info("ProjectProposal updated :" + flag);
+		} else {
+			logger.error("ProjectProposal not updated :" + flag);
+		}
+		return flag;
 	}
 
 }

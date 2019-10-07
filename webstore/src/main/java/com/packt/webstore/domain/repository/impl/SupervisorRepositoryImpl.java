@@ -30,7 +30,7 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 	}
 
 	@Override
-	public Supervisor getSupervisor(int id) {
+	public Supervisor getSupervisor(long id) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("id", id);
 		Supervisor supervisor = (Supervisor) jdbcTemplate

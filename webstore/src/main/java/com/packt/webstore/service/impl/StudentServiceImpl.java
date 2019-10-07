@@ -27,7 +27,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public Supervisor getStudentSupervisor(int studentId) {
+	public Supervisor getStudentSupervisor(long studentId) {
 
 		return studentRepository.getStudentSupervisor(studentId);
 	}

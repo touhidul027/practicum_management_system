@@ -28,7 +28,7 @@
 		  <c:set var="saveProposalUrl" value="/webstore/project/proposal/save" />
 	
 		  <div class="card-body">
-		   <form:form method="POST" action="${saveProposalUrl}" modelAttribute="projectProposal">
+		   <form:form method="POST" action="${saveProposalUrl}" modelAttribute="projectProposalDto">
 		     <div class="form-row">
 				<div class="col-sm-2" path="projectTitle" >
 				  Title:

@@ -11,4 +11,8 @@ public interface ProjectProposalRepository {
 
 	ProjectProposalDto getStudentProjectProposal(int studentId);
 
+	boolean saveprojectProposal(ProjectProposalDto projectProposalDto);
+
+	boolean updateProjectProposal(ProjectProposalDto projectProposalDto);
+
 }

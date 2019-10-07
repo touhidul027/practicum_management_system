@@ -53,12 +53,12 @@ public class StudentRepositoryImpl implements StudentRepository {
 	}
 
 	@Override
-	public Supervisor getStudentSupervisor(int studentId) {
+	public Supervisor getStudentSupervisor(long studentId) {
 		// fetch supervisor id from the students table
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentId", studentId);
-		int supervisorId = jdbcTemplate.queryForObject(
-				"select supervisor_id from students WHERE student_id=:studentId LIMIT 1", param, Integer.class);
+		long supervisorId = jdbcTemplate.queryForObject(
+				"select supervisor_id from students WHERE student_id=:studentId LIMIT 1", param, Long.class);
 		return supervisorRepository.getSupervisor(supervisorId);
 	}
 

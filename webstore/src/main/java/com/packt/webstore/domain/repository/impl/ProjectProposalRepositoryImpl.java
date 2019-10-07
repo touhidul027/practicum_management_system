@@ -59,7 +59,7 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 	public boolean isStudentProjectProposalExist(int studentId) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentId", studentId);
-		logger.info("Student Id : " + studentId );
+		logger.info("Student Id : " + studentId);
 		int rows = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM project_proposals WHERE student_id=:studentId",
 				param, Integer.class);
 		logger.info(rows);
@@ -72,7 +72,7 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		param.put("studentId", studentId);
 		ProjectProposalDto projectProposalDto = (ProjectProposalDto) jdbcTemplate.queryForObject(
 				"SELECT * FROM project_proposals  WHERE student_id=:studentId", param, new ProjectProposalDtoMapper());
-		logger.info(projectProposalDto);
+		logger.info(this.getClass() + " " + projectProposalDto);
 		return projectProposalDto;
 	}
 
@@ -82,8 +82,80 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		public ProjectProposalDto mapRow(ResultSet rs, int arg1) throws SQLException {
 			ProjectProposalDto projectProposalDto = new ProjectProposalDto();
 			projectProposalDto.setSupervisorId(rs.getLong("supervisor_id"));
+			logger.info(rs.getInt("is_confirmed"));
+			projectProposalDto.setConfirmed(rs.getInt("is_confirmed") != 0);
+			logger.info(projectProposalDto.isConfirmed());
+			projectProposalDto.setFirstLongTime(rs.getLong("first_sent_time"));
+			projectProposalDto.setLastLongTime(rs.getLong("last_sent_time"));
+			projectProposalDto.setSupervisorComment(rs.getString("supervisor_comment"));
+			projectProposalDto.setRevisons(rs.getInt("revisions"));
+			projectProposalDto.setProjectTitle(rs.getString("project_title"));
 			projectProposalDto.setProjectDoingAt(rs.getString("project_doing_at"));
+			projectProposalDto.setProjectFor(rs.getString("project_for"));
+			projectProposalDto.setObjective(rs.getString("objective"));
+			projectProposalDto.setTechnologicalStacks(rs.getString("technological_stacks"));
+			projectProposalDto.setModules(rs.getString("modules"));
+			projectProposalDto.setActors(rs.getString("actors"));
+			projectProposalDto.setFunctionalRequirements(rs.getString("functional_requirements"));
 			return projectProposalDto;
 		}
+	}
+
+	@Override
+	public boolean saveprojectProposal(ProjectProposalDto projectProposalDto) {
+		Map<String, Object> paramMaps = new HashMap<String, Object>();
+		paramMaps.put("studentId", projectProposalDto.getStudentId());
+		paramMaps.put("supervisorId", projectProposalDto.getSupervisorId());
+		paramMaps.put("is_confirmed", 0);
+		paramMaps.put("first_sent_time", projectProposalDto.getFirstLongTime());
+		paramMaps.put("last_sent_time", projectProposalDto.getLastLongTime());
+		paramMaps.put("supervisor_comment", "");
+		paramMaps.put("revisions", 0);
+		paramMaps.put("project_title", projectProposalDto.getProjectTitle());
+		paramMaps.put("project_for", projectProposalDto.getProjectFor());
+		paramMaps.put("project_doing_at", projectProposalDto.getProjectDoingAt());
+		paramMaps.put("objective", projectProposalDto.getObjective());
+		paramMaps.put("technological_stacks", projectProposalDto.getTechnologicalStacks());
+		paramMaps.put("modules", projectProposalDto.getModules());
+		paramMaps.put("actors", projectProposalDto.getActors());
+		paramMaps.put("functional_requirements", projectProposalDto.getFunctionalRequirements());
+
+		String sql = "INSERT INTO project_proposals("
+				+ "tbl_id,student_id,supervisor_id, is_confirmed,first_sent_time,\r\n"
+				+ "last_sent_time,revisions, supervisor_comment, project_title,project_for,"
+				+ "project_doing_at,objective,technological_stacks,modules,actors,functional_requirements)"
+				+ "VALUES(DEFAULT,:studentId,:supervisorId,:is_confirmed,:first_sent_time,:last_sent_time,:revisions,:supervisor_comment,\r\n"
+				+ ":project_title,:project_for,:project_doing_at ,:objective,\r\n"
+				+ ":technological_stacks,:modules,:actors,:functional_requirements)";
+
+		int affectedRow = jdbcTemplate.update(sql, paramMaps);
+		logger.info("Project proposal insertion : " + affectedRow);
+
+		return affectedRow == 0 ? false : true;
+	}
+
+	@Override
+	public boolean updateProjectProposal(ProjectProposalDto projectProposalDto) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("studentId", projectProposalDto.getStudentId());
+		params.put("first_sent_time",projectProposalDto.getFirstLongTime() );
+		params.put("last_sent_time",projectProposalDto.getLastLongTime() );
+		params.put("revisions", projectProposalDto.getRevisons());
+		params.put("supervisor_comment", projectProposalDto.getSupervisorComment());
+		params.put("project_title", projectProposalDto.getProjectTitle());
+		params.put("project_for", projectProposalDto.getProjectFor());
+		params.put("project_doing_at", projectProposalDto.getProjectDoingAt());
+		params.put("objective", projectProposalDto.getObjective());
+		params.put("technological_stacks", projectProposalDto.getTechnologicalStacks());
+		params.put("modules", projectProposalDto.getModules());
+		params.put("actors", projectProposalDto.getActors());
+		params.put("functional_requirements", projectProposalDto.getFunctionalRequirements());
+		
+		int rowsAffected = jdbcTemplate.update("UPDATE project_proposals SET  first_sent_time=:first_sent_time, "
+				+ "revisions=:revisions,supervisor_comment=:supervisor_comment,project_title=:project_title,"
+				+"project_for=:project_for,project_doing_at=:project_doing_at,objective=:objective,technological_stacks=:technological_stacks,"
+				+"modules=:modules,actors=:actors,functional_requirements=:functional_requirements "
+				+ "WHERE student_id = :studentId", params);
+		return rowsAffected==0 ? false:true;
 	}
 }

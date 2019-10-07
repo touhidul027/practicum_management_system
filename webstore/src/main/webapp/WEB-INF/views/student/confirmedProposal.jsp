@@ -19,11 +19,8 @@
 <body>
 <!-- add header part  ? which lib iis used-->
 <jsp:include page="header.jsp" flush="true"></jsp:include>
-
 <div class="container">
-     <div class="card-header">
-		 <div>${message}</div> 
-     </div>
+  ${projectProposalDto}
 </div>
 
 </body>

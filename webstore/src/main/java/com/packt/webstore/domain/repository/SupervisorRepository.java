@@ -7,7 +7,7 @@ import com.packt.webstore.domain.Supervisor;
 public interface SupervisorRepository {
 	public List<Supervisor> getSupervisors();
 
-	public Supervisor getSupervisor(int id);
+	public Supervisor getSupervisor(long supervisorId);
 
 	public Supervisor getSupervisorByUserName(String supervisorUserName);
 
