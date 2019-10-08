@@ -51,7 +51,7 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 	}
 
 	@Override
-	public Supervisor getStudentSupervisor(int studentId) {
+	public Supervisor getStudentSupervisor(long studentId) {
 		logger.info(this);
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentId", studentId);
@@ -71,7 +71,10 @@ public class SupervisorRepositoryImpl implements SupervisorRepository {
 			supervisor.setSupervisorId(rs.getInt("supervisor_id"));// supervisor_id is a db column name
 			supervisor.setUserName(rs.getString("user_name"));
 			supervisor.setEmail(rs.getNString("email"));
+			supervisor.setCellPhone(rs.getString("cell_phone"));
+			supervisor.setDesignation(rs.getString("designation"));
 			supervisor.setDepartment(rs.getString("department"));
+			supervisor.setUniversityName(rs.getString("university_name"));
 			return supervisor;
 		}
 	}

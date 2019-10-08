@@ -19,11 +19,14 @@
 <body>
 <jsp:include page="header.jsp" flush="true"></jsp:include>
 <br><br>
-
+<c:set var="reviewProposalUrl" value="/webstore/project/proposal/review" />
 <div class="container">
 	<div class="card">
 		  <div class="card-header">
-		    <div>Project Proposal</div> 
+		    <div>Project Proposal</div>		    
+		    <div style="text-align:right;">
+		    <a  class="nav-link"  href="${reviewProposalUrl}"> Review </a>
+		    </div>
 		  </div>
 		  <c:set var="saveProposalUrl" value="/webstore/project/proposal/save" />
 	

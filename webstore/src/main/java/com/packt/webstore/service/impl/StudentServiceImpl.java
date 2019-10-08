@@ -17,7 +17,7 @@ public class StudentServiceImpl implements StudentService {
 	private StudentRepository studentRepository;
 
 	@Override
-	public Student getStudentById(int id) {
+	public Student getStudentById(long id) {
 		return studentRepository.getStudent(id);
 	}
 
@@ -44,7 +44,7 @@ public class StudentServiceImpl implements StudentService {
 	}
 
 	@Override
-	public boolean updateStudent(int studentId, String cellPhone, String password) {
+	public boolean updateStudent(long studentId, String cellPhone, String password) {
 		return studentRepository.updateStudent(studentId,cellPhone,password);
 	}
 

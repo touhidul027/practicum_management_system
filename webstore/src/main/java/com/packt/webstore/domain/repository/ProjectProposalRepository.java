@@ -7,9 +7,9 @@ public interface ProjectProposalRepository {
 
 	boolean saveprojectProposal(int studentId, int supervisorId,ProjectProposal projectProposal);
 
-	boolean isStudentProjectProposalExist(int studentId);
+	boolean isStudentProjectProposalExist(long studentId);
 
-	ProjectProposalDto getStudentProjectProposal(int studentId);
+	ProjectProposalDto getStudentProjectProposal(long studentId);
 
 	boolean saveprojectProposal(ProjectProposalDto projectProposalDto);
 

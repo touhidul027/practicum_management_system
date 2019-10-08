@@ -60,7 +60,7 @@ public class StudentController {
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	public String saveStudent(Model model, Principal principal, @ModelAttribute("employee") Student student) {
-		int studentId = student.getStudentId();
+		long studentId = student.getStudentId();
 		String cellPhone = student.getCellPhone();
 		String password = student.getPassword();
 		boolean flag = studentService.updateStudent(studentId, cellPhone, password);

@@ -29,7 +29,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	private SupervisorRepository supervisorRepository;
 
 	@Override
-	public Student getStudent(int studentId) {
+	public Student getStudent(long studentId) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentId", studentId);
 		Student student = (Student) jdbcTemplate.queryForObject("SELECT * FROM students WHERE student_id=:studentId",
@@ -93,7 +93,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 	}
 
 	@Override
-	public boolean updateStudent(int studentId,String cellPhone, String password) {
+	public boolean updateStudent(long studentId,String cellPhone, String password) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("studentId", studentId);
 		params.put("cell_phone_number", cellPhone);

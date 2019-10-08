@@ -1,18 +1,21 @@
 package com.packt.webstore.domain;
 
 public class Student {
-	private int studentId;
-	@Override
-	public String toString() {
-		return "Student [studentId=" + studentId + ", userName=" + userName + ", studentEmail=" + studentEmail
-				+ ", studentDepartment=" + studentDepartment + "]";
-	}
+	private long studentId;
+	
 
 	private String userName;
 
 	private String studentEmail;
 	private String studentDepartment;
 	private String cellPhone;
+	public long getStudentId() {
+		return studentId;
+	}
+
+	public void setStudentId(long studentId) {
+		this.studentId = studentId;
+	}
 	private String password ; 
 
 	public String getCellPhone() {
@@ -34,14 +37,6 @@ public class Student {
 	public Student() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public int getStudentId() {
-		return studentId;
-	}
-
-	public void setStudentId(int studentId) {
-		this.studentId = studentId;
 	}
 
 	public String getUserName() {
@@ -66,5 +61,10 @@ public class Student {
 
 	public void setStudentDepartment(String studentDepartment) {
 		this.studentDepartment = studentDepartment;
+	}
+	@Override
+	public String toString() {
+		return "Student [studentId=" + studentId + ", userName=" + userName + ", studentEmail=" + studentEmail
+				+ ", studentDepartment=" + studentDepartment + "]";
 	}
 }

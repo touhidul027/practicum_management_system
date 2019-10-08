@@ -56,7 +56,7 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 	}
 
 	@Override
-	public boolean isStudentProjectProposalExist(int studentId) {
+	public boolean isStudentProjectProposalExist(long studentId) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentId", studentId);
 		logger.info("Student Id : " + studentId);
@@ -67,7 +67,7 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 	}
 
 	@Override
-	public ProjectProposalDto getStudentProjectProposal(int studentId) {
+	public ProjectProposalDto getStudentProjectProposal(long studentId) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentId", studentId);
 		ProjectProposalDto projectProposalDto = (ProjectProposalDto) jdbcTemplate.queryForObject(

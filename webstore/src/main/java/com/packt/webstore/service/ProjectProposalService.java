@@ -8,7 +8,7 @@ public interface ProjectProposalService {
 
 	boolean saveprojectProposal(int studentId, int supervisorId, ProjectProposal projectProposal);
 
-	ProjectProposalDto getProjectProposalStatus(int studentId);
+	ProjectProposalDto getProjectProposalStatus(long studentId);
 
 	boolean saveprojectProposal(ProjectProposalDto projectProposalDto);
 

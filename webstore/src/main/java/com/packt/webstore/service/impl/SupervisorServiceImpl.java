@@ -44,7 +44,7 @@ public class SupervisorServiceImpl implements SupervisorService{
 	}
 
 	@Override
-	public Supervisor getStudentSupervisor(int studentId) {
+	public Supervisor getStudentSupervisor(long studentId) {
 		Supervisor supervisor=supervisorRepository.getStudentSupervisor( studentId);
 		logger.info(supervisor);
 		return supervisor;

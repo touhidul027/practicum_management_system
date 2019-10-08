@@ -18,7 +18,10 @@ CREATE TABLE supervisors (
   supervisor_id INTEGER ,
   user_name VARCHAR(30),
   email VARCHAR(30),
-  department VARCHAR(30)
+  cell_phone VARCHAR(30),
+  designation VARCHAR(30),
+  department VARCHAR(30),
+  university_name VARCHAR(100)
 );
 
 CREATE TABLE notices (
@@ -46,10 +49,10 @@ CREATE TABLE project_proposals (
   supervisor_comment VARCHAR(200),
   project_title VARCHAR(100),
   project_for VARCHAR(100),
-  project_doing_at VARCHAR(50),
-  objective VARCHAR(200),
-  technological_stacks VARCHAR(500),
-  modules VARCHAR(200),
-  actors VARCHAR(100),
-  functional_requirements VARCHAR(1000)
+  project_doing_at VARCHAR(100),
+  objective VARCHAR(10000),
+  technological_stacks VARCHAR(10000),
+  modules VARCHAR(1000),
+  actors VARCHAR(1000),
+  functional_requirements VARCHAR(10000)
 );

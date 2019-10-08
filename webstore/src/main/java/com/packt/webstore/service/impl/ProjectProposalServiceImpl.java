@@ -33,7 +33,7 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 	}
 
 	@Override
-	public ProjectProposalDto getProjectProposalStatus(int studentId) {
+	public ProjectProposalDto getProjectProposalStatus(long studentId) {
 		ProjectProposalDto projectProposalDto = new ProjectProposalDto();
 		Supervisor supervisor = studentRepository.getStudentSupervisor(studentId);
 		int supervisorId = supervisor.getSupervisorId();

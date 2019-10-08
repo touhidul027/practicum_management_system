@@ -13,5 +13,5 @@ public interface SupervisorRepository {
 
 	public Supervisor getSupervisorByStudentId(int studentId);
 
-	public Supervisor getStudentSupervisor(int studentId);
+	public Supervisor getStudentSupervisor(long studentId);
 }

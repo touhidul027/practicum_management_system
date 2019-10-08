@@ -13,6 +13,6 @@ public interface SupervisorService {
 
 	public Supervisor getSupervisorByUserName(String supervisorUserName);
 
-	public Supervisor getStudentSupervisor(int studentId);
+	public Supervisor getStudentSupervisor(long studentId);
 
 }
