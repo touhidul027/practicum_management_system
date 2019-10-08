@@ -54,5 +54,6 @@ CREATE TABLE project_proposals (
   technological_stacks VARCHAR(10000),
   modules VARCHAR(1000),
   actors VARCHAR(1000),
-  functional_requirements VARCHAR(10000)
+  functional_requirements VARCHAR(10000),
+  is_submitted INTEGER
 );

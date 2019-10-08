@@ -40,14 +40,15 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		paramMaps.put("modules", projectProposal.getModules());
 		paramMaps.put("actors", projectProposal.getActors());
 		paramMaps.put("functional_requirements", projectProposal.getFunctionalRequirements());
+		paramMaps.put("is_submitted", projectProposal.getFunctionalRequirements());
 
 		String sql = "INSERT INTO project_proposals("
 				+ "tbl_id,student_id,supervisor_id, is_confirmed,first_sent_time,\r\n"
 				+ "last_sent_time,revisions, supervisor_comment, project_title,project_for,"
-				+ "project_doing_at,objective,technological_stacks,modules,actors,functional_requirements)"
+				+ "project_doing_at,objective,technological_stacks,modules,actors,functional_requirements,is_submitted)"
 				+ "VALUES(DEFAULT,:studentId,:supervisorId,:is_confirmed,:first_sent_time,:last_sent_time,:revisions,:supervisor_comment,\r\n"
 				+ ":project_title,:project_for,:project_doing_at ,:objective,\r\n"
-				+ ":technological_stacks,:modules,:actors,:functional_requirements)";
+				+ ":technological_stacks,:modules,:actors,:functional_requirements,:is_submitted)";
 
 		int affectedRow = jdbcTemplate.update(sql, paramMaps);
 		logger.info(affectedRow);
@@ -97,6 +98,10 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 			projectProposalDto.setModules(rs.getString("modules"));
 			projectProposalDto.setActors(rs.getString("actors"));
 			projectProposalDto.setFunctionalRequirements(rs.getString("functional_requirements"));
+			int isSubmittedValue = rs.getInt("is_submitted");
+			logger.info("getting isSubmittedValue "+isSubmittedValue);
+			projectProposalDto.setSubmitted(isSubmittedValue==0?false:true);
+			logger.info("isSubmittedValue flag : " + projectProposalDto.isSubmitted());
 			return projectProposalDto;
 		}
 	}
@@ -119,14 +124,15 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		paramMaps.put("modules", projectProposalDto.getModules());
 		paramMaps.put("actors", projectProposalDto.getActors());
 		paramMaps.put("functional_requirements", projectProposalDto.getFunctionalRequirements());
+		paramMaps.put("is_submitted", 0);
 
 		String sql = "INSERT INTO project_proposals("
 				+ "tbl_id,student_id,supervisor_id, is_confirmed,first_sent_time,\r\n"
 				+ "last_sent_time,revisions, supervisor_comment, project_title,project_for,"
-				+ "project_doing_at,objective,technological_stacks,modules,actors,functional_requirements)"
+				+ "project_doing_at,objective,technological_stacks,modules,actors,functional_requirements,is_submitted)"
 				+ "VALUES(DEFAULT,:studentId,:supervisorId,:is_confirmed,:first_sent_time,:last_sent_time,:revisions,:supervisor_comment,\r\n"
 				+ ":project_title,:project_for,:project_doing_at ,:objective,\r\n"
-				+ ":technological_stacks,:modules,:actors,:functional_requirements)";
+				+ ":technological_stacks,:modules,:actors,:functional_requirements,:is_submitted)";
 
 		int affectedRow = jdbcTemplate.update(sql, paramMaps);
 		logger.info("Project proposal insertion : " + affectedRow);
@@ -138,8 +144,8 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 	public boolean updateProjectProposal(ProjectProposalDto projectProposalDto) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("studentId", projectProposalDto.getStudentId());
-		params.put("first_sent_time",projectProposalDto.getFirstLongTime() );
-		params.put("last_sent_time",projectProposalDto.getLastLongTime() );
+		params.put("first_sent_time", projectProposalDto.getFirstLongTime());
+		params.put("last_sent_time", projectProposalDto.getLastLongTime());
 		params.put("revisions", projectProposalDto.getRevisons());
 		params.put("supervisor_comment", projectProposalDto.getSupervisorComment());
 		params.put("project_title", projectProposalDto.getProjectTitle());
@@ -150,12 +156,34 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		params.put("modules", projectProposalDto.getModules());
 		params.put("actors", projectProposalDto.getActors());
 		params.put("functional_requirements", projectProposalDto.getFunctionalRequirements());
-		
+		boolean flag = projectProposalDto.isSubmitted();
+		logger.info("flag : " + flag);
+		int isSubmitted = (flag == false) ? 0 : 1;
+		logger.info("isSubmitted : " + isSubmitted);
+		params.put("is_submitted", isSubmitted);
+
 		int rowsAffected = jdbcTemplate.update("UPDATE project_proposals SET  first_sent_time=:first_sent_time, "
 				+ "revisions=:revisions,supervisor_comment=:supervisor_comment,project_title=:project_title,"
-				+"project_for=:project_for,project_doing_at=:project_doing_at,objective=:objective,technological_stacks=:technological_stacks,"
-				+"modules=:modules,actors=:actors,functional_requirements=:functional_requirements "
+				+ "project_for=:project_for,project_doing_at=:project_doing_at,objective=:objective,technological_stacks=:technological_stacks,"
+				+ "modules=:modules,actors=:actors,functional_requirements=:functional_requirements,is_submitted=:is_submitted "
 				+ "WHERE student_id = :studentId", params);
+		return rowsAffected == 0 ? false : true;
+	}
+
+	@Override
+	public boolean setProjectProposalSubmittedStatus(ProjectProposalDto projectProposalDto) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("studentId", projectProposalDto.getStudentId());
+		params.put("first_sent_time", projectProposalDto.getFirstLongTime());
+		logger.info("first_sent_time" + projectProposalDto.getFirstLongTime());
+		boolean flag = projectProposalDto.isSubmitted();
+		logger.info(" isSubmitted flag : " + flag);
+		int isSubmitted = (flag == false) ? 0 : 1;
+		logger.info("isSubmitted : " + isSubmitted);
+		params.put("is_submitted", isSubmitted);
+		
+		int rowsAffected = jdbcTemplate.update("UPDATE project_proposals SET first_sent_time=:first_sent_time,is_submitted=:is_submitted WHERE student_id = :studentId", params);
+		logger.info("update rowsAffected "+ rowsAffected);
 		return rowsAffected==0 ? false:true;
 	}
 }

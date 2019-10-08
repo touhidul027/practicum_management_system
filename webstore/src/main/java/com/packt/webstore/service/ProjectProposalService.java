@@ -14,4 +14,6 @@ public interface ProjectProposalService {
 
 	boolean updateProjectProposal(ProjectProposalDto projectProposalDto);
 
+	boolean setProjectProposalSubmittedStatus(ProjectProposalDto projectProposalDto);
+
 }

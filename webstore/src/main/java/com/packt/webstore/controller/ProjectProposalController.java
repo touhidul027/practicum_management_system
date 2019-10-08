@@ -38,10 +38,21 @@ public class ProjectProposalController {
 	@Autowired
 	private SupervisorService supervisorService;
 
-	@RequestMapping(value = "/submit", method = RequestMethod.POST)
-	public String getProjectProposal(Model model) {
-		logger.info("");
-		return getFullViewName("proposal");
+	@RequestMapping(value = "/submit", method = RequestMethod.GET)
+	public String submitProjectProposal(Model model,
+			@ModelAttribute("projectProposalDto") ProjectProposalDto projectProposalDto) {
+		logger.info("projectProposalDto student ID : " + projectProposalDto.getStudentId());
+		boolean isSubmitted = projectProposalService.setProjectProposalSubmittedStatus(projectProposalDto);
+		if (isSubmitted) {
+			model.addAttribute("message", "Your Project proposal have been successfully submitted.");
+			logger.info("Your Project proposal have been successfully submitted");
+		} else {
+			model.addAttribute("message",
+					"Your Project proposal have not successfully submitted.Try again or send report to the developer teams.");
+			logger.error(
+					"Your Project proposal have not successfully submitted.Try again or send report to the developer teams.");
+		}
+		return getFullViewName("waiting");
 	}
 
 	@RequestMapping(value = "/save", method = RequestMethod.POST)
@@ -107,12 +118,19 @@ public class ProjectProposalController {
 		List<String> actorsAsList = new ArrayList<String>(Arrays.asList(actors.split(",")));
 		model.addAttribute("actorsAsList", actorsAsList);
 		logger.info("actorsAsList : " + actorsAsList);
-		
+
 		String functionalRequirements = projectProposalDto.getFunctionalRequirements();
-		List<String> functionalRequirementsAsList = new ArrayList<String>(Arrays.asList(functionalRequirements.split(",")));
+		List<String> functionalRequirementsAsList = new ArrayList<String>(
+				Arrays.asList(functionalRequirements.split(",")));
 		model.addAttribute("functionalRequirementsAsList", functionalRequirementsAsList);
 		logger.info("functionalRequirementsAsList : " + functionalRequirementsAsList);
-		
+
+		boolean isSubmitted = projectProposalDto.isSubmitted() ; 
+		if(isSubmitted) {
+			model.addAttribute("isSubmitted", "yes");
+		}else {
+			model.addAttribute("isSubmitted", "no");
+		}
 		
 		return getFullViewName("proposalReview");
 	}

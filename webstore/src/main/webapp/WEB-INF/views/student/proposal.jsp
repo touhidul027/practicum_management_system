@@ -13,7 +13,6 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <style>
-  
   </style>
 </head>
 <body>
@@ -30,6 +29,8 @@
 		  </div>
 		  <c:set var="saveProposalUrl" value="/webstore/project/proposal/save" />
 	
+	      <c:choose>
+		  <c:when test="${isSubmitted=='no'}">			       			   
 		  <div class="card-body">
 		   <form:form method="POST" action="${saveProposalUrl}" modelAttribute="projectProposalDto">
 		     <div class="form-row">
@@ -100,10 +101,23 @@
             </tr>
              
 		     </form:form>     
-		</div>
+		 </div>
+		 </c:when>    
+	     <c:otherwise>
+			 <div class="card text-center">
+			    <div class="card-header">
+			    </div>
+			    <div class="card-body">
+					 <h5 class="card-title">Project Proposal</h5>
+					 <p class="card-text"> You already Submitted project proposal.Please wait until feedback come from supervisor.</p>
+				</div>
+				<div class="card-footer text-muted">				   
+			    </div>
+			</div>		  
+		</c:otherwise>
+		</c:choose>
 	</div>
 </div>
-
 
 </body>
 </html>

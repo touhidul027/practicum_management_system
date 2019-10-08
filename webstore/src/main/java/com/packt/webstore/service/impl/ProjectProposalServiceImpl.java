@@ -87,4 +87,19 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 		return flag;
 	}
 
+	@Override
+	public boolean setProjectProposalSubmittedStatus(ProjectProposalDto projectProposalDto) {
+		projectProposalDto.setFirstLongTime(System.currentTimeMillis());
+		projectProposalDto.setSubmitted(true);
+		logger.info("Setting first sent time and ,isSubmitted to true");
+		boolean isSubmitted= projectProposalRepository.setProjectProposalSubmittedStatus(projectProposalDto);
+		if(isSubmitted) {
+			logger.info("updated isSubmitted status worked");
+		}else {
+			logger.error("updated isSubmitted status failed.");
+
+		}
+		return isSubmitted;
+	}
+
 }

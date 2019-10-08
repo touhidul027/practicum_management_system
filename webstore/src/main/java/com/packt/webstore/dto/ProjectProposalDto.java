@@ -8,6 +8,30 @@ import lombok.Setter;
 import lombok.ToString;
 
 public class ProjectProposalDto {
+	private long studentId ; 
+	private long supervisorId ;	
+	private String projectTitle;
+	private String projectFor;
+	private String projectDoingAt;
+	private String objective;
+	private String technologicalStacks;
+	private String modules;
+	private String actors;	
+	private String functionalRequirements;
+	private boolean isConfirmed ;
+	private long firstLongTime;
+	private long lastLongTime;
+	private int revisons;
+	private String supervisorComment ;
+	private ProposalStatus proposalStatus;
+	private boolean isSubmitted;
+	public boolean isSubmitted() {
+		return isSubmitted;
+	}
+	public void setSubmitted(boolean isSubmitted) {
+		this.isSubmitted = isSubmitted;
+	}
+	
 	@Override
 	public String toString() {
 		return "ProjectProposalDto [studentId=" + studentId + ", supervisorId=" + supervisorId + ", projectTitle="
@@ -15,9 +39,9 @@ public class ProjectProposalDto {
 				+ objective + ", technologicalStacks=" + technologicalStacks + ", modules=" + modules + ", actors="
 				+ actors + ", functionalRequirements=" + functionalRequirements + ", isConfirmed=" + isConfirmed
 				+ ", firstLongTime=" + firstLongTime + ", lastLongTime=" + lastLongTime + ", revisons=" + revisons
-				+ ", supervisorComment=" + supervisorComment + ", proposalStatus=" + proposalStatus + "]";
+				+ ", supervisorComment=" + supervisorComment + ", proposalStatus=" + proposalStatus + ", isSubmitted="
+				+ isSubmitted + "]";
 	}
-	private long studentId ; 
 	public long getStudentId() {
 		return studentId;
 	}
@@ -119,19 +143,4 @@ public class ProjectProposalDto {
 	public void setProposalStatus(ProposalStatus proposalStatus) {
 		this.proposalStatus = proposalStatus;
 	}
-	private long supervisorId ;	
-	private String projectTitle;
-	private String projectFor;
-	private String projectDoingAt;
-	private String objective;
-	private String technologicalStacks;
-	private String modules;
-	private String actors;
-	private String functionalRequirements;
-	private boolean isConfirmed ;
-	private long firstLongTime;
-	private long lastLongTime;
-	private int revisons;
-	private String supervisorComment ;
-	private ProposalStatus proposalStatus;
 }

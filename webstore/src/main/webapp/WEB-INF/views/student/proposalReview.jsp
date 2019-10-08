@@ -20,6 +20,15 @@
 <!-- add header part  ? which lib iis used-->
 <jsp:include page="header.jsp" flush="true"></jsp:include>
 <br><br>
+<c:set var="submitProposal" value="/webstore/project/proposal/submit" />
+ <c:choose>
+	<c:when test="${isSubmitted=='no'}">
+		<div class="container">
+           <a href="${submitProposal}" class="card-link">Submit Proposal</a>
+         </div>
+	</c:when>
+</c:choose>
+
 
 <div class="container text-center">
      <div >
@@ -30,7 +39,7 @@
     <br><br>
 	<div>
 		By <br>
-		Md. Touhidul Islam <br>
+		${student.userName} <br>
 		ID-${projectProposalDto.studentId} <br>
 		Department of CSE <br>
 		International University of Business Agriculture and technology

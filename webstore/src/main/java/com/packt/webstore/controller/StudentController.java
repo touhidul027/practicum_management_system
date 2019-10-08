@@ -87,6 +87,12 @@ public class StudentController {
 		ProposalStatus proposalStatus=projectProposalDto.getProposalStatus();
 		logger.info("proposalStatus : " + proposalStatus.toString());
 		model.addAttribute("projectProposalDto", projectProposalDto);
+		boolean isSubmitted = projectProposalDto.isSubmitted() ; 
+		if(isSubmitted) {
+			model.addAttribute("isSubmitted", "yes");
+		}else {
+			model.addAttribute("isSubmitted", "no");
+		}
 		if(proposalStatus==ProposalStatus.CONFIRMED) {		
 			return getFullViewName("confirmedProposal");
 		}

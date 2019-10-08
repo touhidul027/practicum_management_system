@@ -20,7 +20,10 @@
 <!-- add header part  ? which lib iis used-->
 <jsp:include page="header.jsp" flush="true"></jsp:include>
 <div class="container">
-   Working on this feature is going on.Try again later.
+   Working on this feature is still going on...
+   <div class="card-header">
+    ${message}
+  </div>
 </div>
 
 </body>

@@ -162,7 +162,9 @@ Actor : Student
         'module','actors','functional_requirements');
    4.3 ProjectProposalDto.java is created
    4.4 Student can save new proposal and can update at later,can review the proposal 
-   4.5 Student see the propject proposal preview
+   4.5 Student see the propject proposal preview,have submit proposal option
+   4.6 After submit the proposal he is not allowed to resubmit the proposal untill feedback come
+       from supervisor.
    
 5.Can submit log evaluation form,view the status
 6.Can make report by selecting software process model,can update report continuously
