@@ -171,3 +171,10 @@ Actor : Student
 7.Can read notice
 8.Can chat with supervisor and with dept. Administrator
 9.Can see the own performance dynamically
+
+Actor: Supervisor
+-----------------------------
+1. Supervisor can confirmed project proposal submitted by student
+   [for 4.Can submit project proposals to supervisor]
+1.1 Creating jsp view files for all project proposal and specific project proposal
+1.2 

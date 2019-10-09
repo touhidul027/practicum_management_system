@@ -15,5 +15,23 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+ 
+            <div class="card text-center">
+			    <div class="card-header">
+			    </div>
+			    <div class="card-body">
+					 <h5 class="card-title">Project Proposals</h5>
+					 <p class="card-text"> ${message}</p>
+				</div>
+				<div class="card-footer text-muted">
+				 <c:set var="reviewProposalUrl" value="/webstore/project/proposal/supervisor/review" />
+				 <div style="text-align:right;">
+		         <a  class="nav-link"  href="${reviewProposalUrl}"> Review </a>
+		        </div>				   
+			    </div>
+			</div>
+			
+			
+ 
 </body>
 </html>

@@ -134,6 +134,12 @@ public class ProjectProposalController {
 		
 		return getFullViewName("proposalReview");
 	}
+	
+	@RequestMapping(value = "/supervisor/review", method = RequestMethod.GET)
+	public String studentsPage(Model model, Principal principal) {
+		model.addAttribute("message", "Developer is working on this feature.");
+		return "supervisor/proposal";
+	}
 
 	public String getFullViewName(String viewName) {
 		return "student/" + viewName;
