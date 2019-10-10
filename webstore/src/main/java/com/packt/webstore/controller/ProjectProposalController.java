@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -137,8 +138,47 @@ public class ProjectProposalController {
 		return getFullViewName("proposalReview");
 	}
 
-	@RequestMapping(value = "/supervisor/review", method = RequestMethod.GET)
-	public String seeProjectProposalForReview(Model model, Principal principal) {
+	@RequestMapping(value = "/supervisor/review/{studentId}", method = RequestMethod.GET)
+	public String seeProjectProposalForReview(Model model, Principal principal,
+			@PathVariable(value = "studentId") String studentIdStr) {
+		logger.info("Student Id : " + studentIdStr);
+		long studentId = Long.parseLong(studentIdStr);
+		Student student = studentService.getStudentById(studentId);
+		logger.info("Student :" + student);
+		model.addAttribute("student", student);
+
+		Supervisor supervisor = supervisorService.getStudentSupervisor(studentId);
+		logger.info("Supervisor :" + supervisor);
+		model.addAttribute("supervisor", supervisor);
+		
+		ProjectProposalDto projectProposalDto = projectProposalService.getProjectProposalStatus(studentId);
+		logger.info("Proposal Title : " + projectProposalDto.getProjectTitle());
+		
+		// for specific view
+		String technologicalStacks = projectProposalDto.getTechnologicalStacks();
+		List<String> technologicalStacksAsList = new ArrayList<String>(Arrays.asList(technologicalStacks.split(",")));
+		model.addAttribute("technologicalStacksAsList", technologicalStacksAsList);
+		logger.info("technologicalStacksAsList : " + technologicalStacksAsList);
+
+		String modules = projectProposalDto.getModules();
+		List<String> modulesAsList = new ArrayList<String>(Arrays.asList(modules.split(",")));
+		model.addAttribute("modulesAsList", modulesAsList);
+		logger.info("modulesAsList : " + modulesAsList);
+
+		String actors = projectProposalDto.getActors();
+		List<String> actorsAsList = new ArrayList<String>(Arrays.asList(actors.split(",")));
+		model.addAttribute("actorsAsList", actorsAsList);
+		logger.info("actorsAsList : " + actorsAsList);
+
+		String functionalRequirements = projectProposalDto.getFunctionalRequirements();
+		List<String> functionalRequirementsAsList = new ArrayList<String>(
+				Arrays.asList(functionalRequirements.split(",")));
+		model.addAttribute("functionalRequirementsAsList", functionalRequirementsAsList);
+		logger.info("functionalRequirementsAsList : " + functionalRequirementsAsList);
+		
+		
+		model.addAttribute("projectProposalDto", projectProposalDto);
+		
 		return "supervisor/proposal";
 	}
 

@@ -14,6 +14,7 @@
   </style>
 </head>
 <body>
+
 <jsp:include page="header.jsp"></jsp:include>
 <div class="container" >
 <table class="table">
@@ -36,12 +37,13 @@
       <td>${studentsMap[projectProposalDto.studentId]}</td>
       <td>${projectProposalDto.projectTitle}</td>	  	  
 	  <td>
-		  <c:choose>
-				<c:when test="${projectProposalDto.isConfirmed()}">	
-			        <a class="nav-link"  href="#">Yes Confirmed</a>
+	  <c:url var="urlProposalReview" value="/project/proposal/supervisor/review/${projectProposalDto.studentId}" />
+		  <c:choose>				
+		  <c:when test="${projectProposalDto.isConfirmed()}">	
+			        <a class="nav-link"  href="${urlProposalReview}">Yes Confirmed</a>
 				</c:when>
 				 <c:otherwise>
-				 	 <a class="nav-link"  href="#">Please Review</a>
+				 	 <a class="nav-link"  href="${urlProposalReview}">Please Review</a>
 				 </c:otherwise>
 		 </c:choose>
 	  </td>
