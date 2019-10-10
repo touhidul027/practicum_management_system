@@ -1,5 +1,7 @@
 package com.packt.webstore.domain.repository;
 
+import java.util.List;
+
 import com.packt.webstore.domain.ProjectProposal;
 import com.packt.webstore.dto.ProjectProposalDto;
 
@@ -16,5 +18,7 @@ public interface ProjectProposalRepository {
 	boolean updateProjectProposal(ProjectProposalDto projectProposalDto);
 
 	boolean setProjectProposalSubmittedStatus(ProjectProposalDto projectProposalDto);
+
+	List<ProjectProposalDto> getAllSubmittedProposalsForASupervisor(long supervisorId);
 
 }

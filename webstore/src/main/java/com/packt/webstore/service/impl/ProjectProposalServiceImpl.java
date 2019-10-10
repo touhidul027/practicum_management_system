@@ -1,5 +1,7 @@
 package com.packt.webstore.service.impl;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -64,7 +66,7 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 
 	@Override
 	public boolean saveprojectProposal(ProjectProposalDto projectProposalDto) {
-		projectProposalDto.setFirstLongTime(0); //first insertion
+		projectProposalDto.setFirstLongTime(0); // first insertion
 		projectProposalDto.setLastLongTime(0);
 		boolean flag = projectProposalRepository.saveprojectProposal(projectProposalDto);
 		if (flag) {
@@ -92,14 +94,26 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 		projectProposalDto.setFirstLongTime(System.currentTimeMillis());
 		projectProposalDto.setSubmitted(true);
 		logger.info("Setting first sent time and ,isSubmitted to true");
-		boolean isSubmitted= projectProposalRepository.setProjectProposalSubmittedStatus(projectProposalDto);
-		if(isSubmitted) {
+		boolean isSubmitted = projectProposalRepository.setProjectProposalSubmittedStatus(projectProposalDto);
+		if (isSubmitted) {
 			logger.info("updated isSubmitted status worked");
-		}else {
+		} else {
 			logger.error("updated isSubmitted status failed.");
 
 		}
 		return isSubmitted;
+	}
+
+	@Override
+	public List<ProjectProposalDto> getAllSubmittedProposalsForASupervisor(long supervisorId) {
+		List<ProjectProposalDto> projectProposalsDto = projectProposalRepository
+				.getAllSubmittedProposalsForASupervisor(supervisorId);
+		for (ProjectProposalDto projectProposalDto : projectProposalsDto) {
+			logger.info("ID :" + projectProposalDto.getStudentId() + "  Title name :"
+					+ projectProposalDto.getProjectTitle());
+		}
+
+		return projectProposalsDto;
 	}
 
 }

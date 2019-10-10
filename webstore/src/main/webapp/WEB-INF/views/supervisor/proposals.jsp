@@ -15,23 +15,41 @@
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
- 
-            <div class="card text-center">
-			    <div class="card-header">
-			    </div>
-			    <div class="card-body">
-					 <h5 class="card-title">Project Proposals</h5>
-					 <p class="card-text"> ${message}</p>
-				</div>
-				<div class="card-footer text-muted">
-				 <c:set var="reviewProposalUrl" value="/webstore/project/proposal/supervisor/review" />
-				 <div style="text-align:right;">
-		         <a  class="nav-link"  href="${reviewProposalUrl}"> Review </a>
-		        </div>				   
-			    </div>
-			</div>
-			
-			
+<div class="container" >
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Title</th>
+	  <th scope="col">Status</th>
+    </tr>
+  </thead>
+  <tbody>
+  <c:set var="count" value="0" scope="page" />
+  <c:forEach items="${projectProposalsDto}" var="projectProposalDto">
+  <c:set var="count" value="${count + 1}" scope="page"/>
+   <tr>
+      <th scope="row"><c:out value="${count}" /></th>
+      <td> <a class="nav-link"  href="#">${projectProposalDto.studentId}</a> </td>
+      <td>${studentsMap[projectProposalDto.studentId]}</td>
+      <td>${projectProposalDto.projectTitle}</td>	  	  
+	  <td>
+		  <c:choose>
+				<c:when test="${projectProposalDto.isConfirmed()}">	
+			        <a class="nav-link"  href="#">Yes Confirmed</a>
+				</c:when>
+				 <c:otherwise>
+				 	 <a class="nav-link"  href="#">Please Review</a>
+				 </c:otherwise>
+		 </c:choose>
+	  </td>
+    </tr>
+  </c:forEach>
+  </tbody>
+</table>
+</div>		
  
 </body>
 </html>

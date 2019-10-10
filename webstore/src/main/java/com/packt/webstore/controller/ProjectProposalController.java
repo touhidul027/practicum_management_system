@@ -3,7 +3,9 @@ package com.packt.webstore.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,19 +127,18 @@ public class ProjectProposalController {
 		model.addAttribute("functionalRequirementsAsList", functionalRequirementsAsList);
 		logger.info("functionalRequirementsAsList : " + functionalRequirementsAsList);
 
-		boolean isSubmitted = projectProposalDto.isSubmitted() ; 
-		if(isSubmitted) {
+		boolean isSubmitted = projectProposalDto.isSubmitted();
+		if (isSubmitted) {
 			model.addAttribute("isSubmitted", "yes");
-		}else {
+		} else {
 			model.addAttribute("isSubmitted", "no");
 		}
-		
+
 		return getFullViewName("proposalReview");
 	}
-	
+
 	@RequestMapping(value = "/supervisor/review", method = RequestMethod.GET)
-	public String studentsPage(Model model, Principal principal) {
-		model.addAttribute("message", "Developer is working on this feature.");
+	public String seeProjectProposalForReview(Model model, Principal principal) {
 		return "supervisor/proposal";
 	}
 

@@ -82,6 +82,7 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		@Override
 		public ProjectProposalDto mapRow(ResultSet rs, int arg1) throws SQLException {
 			ProjectProposalDto projectProposalDto = new ProjectProposalDto();
+			projectProposalDto.setStudentId(rs.getLong("student_id"));
 			projectProposalDto.setSupervisorId(rs.getLong("supervisor_id"));
 			logger.info(rs.getInt("is_confirmed"));
 			projectProposalDto.setConfirmed(rs.getInt("is_confirmed") != 0);
@@ -185,5 +186,17 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		int rowsAffected = jdbcTemplate.update("UPDATE project_proposals SET first_sent_time=:first_sent_time,is_submitted=:is_submitted WHERE student_id = :studentId", params);
 		logger.info("update rowsAffected "+ rowsAffected);
 		return rowsAffected==0 ? false:true;
+	}
+
+	@Override
+	public List<ProjectProposalDto> getAllSubmittedProposalsForASupervisor(long supervisorId) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("supervisorId", supervisorId);
+		logger.info("About to get the supervisors list.");
+		@SuppressWarnings("unchecked")
+		List<ProjectProposalDto> projectProposalsDto = (List<ProjectProposalDto>) jdbcTemplate.query(
+				"SELECT * FROM project_proposals  WHERE supervisor_id=:supervisorId", param, new ProjectProposalDtoMapper());
+		logger.info("Query run is finished.");
+		return projectProposalsDto;
 	}
 }
