@@ -116,4 +116,11 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 		return projectProposalsDto;
 	}
 
+	@Override
+	public boolean setProposalComment(long studentId, String comment) {
+		boolean flag = projectProposalRepository.setProposalComment(studentId,comment);
+		logger.info("Is comment updated : " + flag);
+		return flag;
+	}
+
 }

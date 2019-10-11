@@ -9,12 +9,41 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-  <style>
-  
-  </style>
+
+<script type = "text/javascript">
+       function showCommentForm() {
+    	    document.getElementById("commentForm").style.display="block";
+       }
+       function closeCommentForm() {
+   	    document.getElementById("commentForm").style.display="none";
+       }
+</script>
+
 </head>
 <body>
 <jsp:include page="header.jsp"></jsp:include>
+ <c:url var="urlProposalConfirm" value="/project/proposal/supervisor/confirm/${projectProposalDto.studentId}" />
+ <c:url var="urlProposalConfirm" value="/project/proposal/supervisor/confirm/${projectProposalDto.studentId}" />
+
+ <div class="container" >
+ <div class="col-sm-3 text-center" >
+   <a class="nav-link"  href="${urlProposalConfirm}">Accept this proposal</a>
+   <a class="nav-link"  onclick="showCommentForm();">Return this proposal</a>
+  </div>
+ <br>
+ <div id="commentForm" class="card" style="display:none;" >
+  <c:url var="urlCommentConfirm" value="/project/proposal/supervisor/return/${projectProposalDto.studentId}" />
+ <form action="${urlCommentConfirm}" method="post" >
+  <div class="form-group col-sm-10">
+    <label for="comment">Please put comment</label><br>
+    <textarea class="form-control" rows="5" id="comment" name="comment" ></textarea><br>
+      <button type="submit" class="btn btn-primary">Submit</button>
+   </div>
+</form>
+   <a class="nav-link"  id="close" onclick="closeCommentForm();" >close</a>
+</div>
+
+ </div>
  
  <div class="container text-center">
      <div >

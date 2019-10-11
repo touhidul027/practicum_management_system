@@ -7,6 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -150,10 +152,10 @@ public class ProjectProposalController {
 		Supervisor supervisor = supervisorService.getStudentSupervisor(studentId);
 		logger.info("Supervisor :" + supervisor);
 		model.addAttribute("supervisor", supervisor);
-		
+
 		ProjectProposalDto projectProposalDto = projectProposalService.getProjectProposalStatus(studentId);
 		logger.info("Proposal Title : " + projectProposalDto.getProjectTitle());
-		
+
 		// for specific view
 		String technologicalStacks = projectProposalDto.getTechnologicalStacks();
 		List<String> technologicalStacksAsList = new ArrayList<String>(Arrays.asList(technologicalStacks.split(",")));
@@ -175,11 +177,26 @@ public class ProjectProposalController {
 				Arrays.asList(functionalRequirements.split(",")));
 		model.addAttribute("functionalRequirementsAsList", functionalRequirementsAsList);
 		logger.info("functionalRequirementsAsList : " + functionalRequirementsAsList);
-		
-		
+
 		model.addAttribute("projectProposalDto", projectProposalDto);
-		
+
 		return "supervisor/proposal";
+	}
+
+	@RequestMapping(value = "/supervisor/return/{studentId}", method = RequestMethod.POST)
+	public String setProposalComment(Model model, HttpServletRequest req, Principal principal,
+			@PathVariable(value = "studentId") String studentIdStr) {
+		logger.info("Student Id : " + studentIdStr);
+		long studentId = Long.parseLong(studentIdStr);
+		String comment = (String) req.getParameter("comment");
+		logger.info("Supervisor comment : " + comment);
+		boolean flag = projectProposalService.setProposalComment(studentId,comment);
+		if (flag) {
+            model.addAttribute("message", "Proposal Successfully returned.");
+		} else {
+			model.addAttribute("message", "Sorry Exception occured.It will be fixed soon.");
+		}
+		return "supervisor/thanks";
 	}
 
 	public String getFullViewName(String viewName) {

@@ -21,4 +21,8 @@ public interface ProjectProposalRepository {
 
 	List<ProjectProposalDto> getAllSubmittedProposalsForASupervisor(long supervisorId);
 
+	boolean setProposalComment(long studentId, String comment);
+	
+	int getProjectProposalRevisions(long studentId);
+
 }

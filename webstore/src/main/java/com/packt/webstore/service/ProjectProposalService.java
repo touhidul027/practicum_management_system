@@ -20,4 +20,6 @@ public interface ProjectProposalService {
 
 	List<ProjectProposalDto> getAllSubmittedProposalsForASupervisor(long supervisorId);
 
+	boolean setProposalComment(long studentId, String comment);
+
 }

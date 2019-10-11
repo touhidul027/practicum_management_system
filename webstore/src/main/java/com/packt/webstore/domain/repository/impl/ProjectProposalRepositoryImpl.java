@@ -100,8 +100,8 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 			projectProposalDto.setActors(rs.getString("actors"));
 			projectProposalDto.setFunctionalRequirements(rs.getString("functional_requirements"));
 			int isSubmittedValue = rs.getInt("is_submitted");
-			logger.info("getting isSubmittedValue "+isSubmittedValue);
-			projectProposalDto.setSubmitted(isSubmittedValue==0?false:true);
+			logger.info("getting isSubmittedValue " + isSubmittedValue);
+			projectProposalDto.setSubmitted(isSubmittedValue == 0 ? false : true);
 			logger.info("isSubmittedValue flag : " + projectProposalDto.isSubmitted());
 			return projectProposalDto;
 		}
@@ -182,10 +182,12 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		int isSubmitted = (flag == false) ? 0 : 1;
 		logger.info("isSubmitted : " + isSubmitted);
 		params.put("is_submitted", isSubmitted);
-		
-		int rowsAffected = jdbcTemplate.update("UPDATE project_proposals SET first_sent_time=:first_sent_time,is_submitted=:is_submitted WHERE student_id = :studentId", params);
-		logger.info("update rowsAffected "+ rowsAffected);
-		return rowsAffected==0 ? false:true;
+
+		int rowsAffected = jdbcTemplate.update(
+				"UPDATE project_proposals SET first_sent_time=:first_sent_time,is_submitted=:is_submitted WHERE student_id = :studentId",
+				params);
+		logger.info("update rowsAffected " + rowsAffected);
+		return rowsAffected == 0 ? false : true;
 	}
 
 	@Override
@@ -195,8 +197,39 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		logger.info("About to get the supervisors list.");
 		@SuppressWarnings("unchecked")
 		List<ProjectProposalDto> projectProposalsDto = (List<ProjectProposalDto>) jdbcTemplate.query(
-				"SELECT * FROM project_proposals  WHERE supervisor_id=:supervisorId", param, new ProjectProposalDtoMapper());
+				"SELECT * FROM project_proposals  WHERE supervisor_id=:supervisorId", param,
+				new ProjectProposalDtoMapper());
 		logger.info("Query run is finished.");
 		return projectProposalsDto;
 	}
+    
+	
+	
+	@Override
+	public boolean setProposalComment(long studentId, String comment) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("studentId", studentId);
+		
+		int revisions = getProjectProposalRevisions(studentId) ;
+		params.put("revisions", revisions);
+		params.put("is_submitted", 0);
+		params.put("supervisor_comment", comment);
+		
+		int rowsAffected = jdbcTemplate.update(
+				"UPDATE project_proposals SET supervisor_comment=:supervisor_comment,revisions=:revisions,is_submitted=:is_submitted WHERE student_id = :studentId",
+				params);
+		logger.info("update rowsAffected " + rowsAffected);
+		return rowsAffected == 0 ? false : true;
+	}
+
+	@Override
+	public int getProjectProposalRevisions(long studentId) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("studentId", studentId);
+		 int revisions = jdbcTemplate.queryForObject(
+				"SELECT revisions FROM project_proposals  WHERE student_id=:studentId", param, Integer.class);
+		logger.info("revisions " + revisions );
+		return 0;
+	}
+
 }
