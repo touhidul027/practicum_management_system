@@ -60,7 +60,7 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 		logger.info("Supervisor ID " + supervisor.getSupervisorId() + " by studentRepository.");
 		logger.info("Supervisor ID " + projectProposalDto.getSupervisorId() + " by projectProposalDto.");
 		projectProposalDto.setStudentId(studentId);
-		logger.info(projectProposalDto);
+		// logger.info(projectProposalDto);
 		return projectProposalDto;
 	}
 
@@ -118,9 +118,16 @@ public class ProjectProposalServiceImpl implements ProjectProposalService {
 
 	@Override
 	public boolean setProposalComment(long studentId, String comment) {
-		boolean flag = projectProposalRepository.setProposalComment(studentId,comment);
+		boolean flag = projectProposalRepository.setProposalComment(studentId, comment);
 		logger.info("Is comment updated : " + flag);
 		return flag;
+	}
+
+	@Override
+	public boolean confirmProjectProposal(long studentId) {
+		boolean isConfirmed = projectProposalRepository.confirmProjectProposal(studentId);
+		logger.info("confirmProjectProposal flag " + isConfirmed);
+		return isConfirmed;
 	}
 
 }

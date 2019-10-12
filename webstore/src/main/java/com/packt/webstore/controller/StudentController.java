@@ -83,7 +83,7 @@ public class StudentController {
 		Student student = studentService.getStudentByEmail(principal.getName());
 		logger.info(student);
 		ProjectProposalDto projectProposalDto = projectProposalService.getProjectProposalStatus(student.getStudentId());
-		logger.info(projectProposalDto);
+		//logger.info(projectProposalDto);
 		ProposalStatus proposalStatus=projectProposalDto.getProposalStatus();
 		logger.info("proposalStatus : " + proposalStatus.toString());
 		model.addAttribute("projectProposalDto", projectProposalDto);
@@ -93,9 +93,7 @@ public class StudentController {
 		}else {
 			model.addAttribute("isSubmitted", "no");
 		}
-		if(proposalStatus==ProposalStatus.CONFIRMED) {		
-			return getFullViewName("confirmedProposal");
-		}
+		logger.info("Supervisor comment : " + projectProposalDto.getSupervisorComment());
 		return getFullViewName("proposal");
 	}
 	

@@ -22,4 +22,6 @@ public interface ProjectProposalService {
 
 	boolean setProposalComment(long studentId, String comment);
 
+	boolean confirmProjectProposal(long studentId);
+
 }

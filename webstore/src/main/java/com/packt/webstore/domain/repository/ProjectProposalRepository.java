@@ -25,4 +25,6 @@ public interface ProjectProposalRepository {
 	
 	int getProjectProposalRevisions(long studentId);
 
+	boolean confirmProjectProposal(long studentId);
+
 }

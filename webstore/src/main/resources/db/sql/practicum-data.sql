@@ -20,7 +20,7 @@ INSERT INTO notices VALUES (102,1510,'All',1349333576093,'Meeting with Co Superv
 INSERT INTO project_proposals(tbl_id,student_id,supervisor_id, is_confirmed,first_sent_time,
 last_sent_time,revisions, supervisor_comment, project_title,project_for,project_doing_at, 
 objective,technological_stacks,modules,actors,functional_requirements, is_submitted)VALUES
-(DEFAULT,15103199,9990101,0,1549333576093,1549333576093,1,'Supervisor Comment','Practicum Management System',
+(DEFAULT,15103199,9990101,0,1549333576093,1549333576093,0,'','Practicum Management System',
 'IUBAT','Square Dots','Overall , the purpose of designing the Practicum Management System is to ease managing
 the practicum semester of IUBAT university.It will help Department administrator,supervisors
 including company supervisor,students as well as respective users make their practicum activity

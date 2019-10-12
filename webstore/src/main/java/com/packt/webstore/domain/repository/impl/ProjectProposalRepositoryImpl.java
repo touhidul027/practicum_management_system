@@ -73,7 +73,7 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		param.put("studentId", studentId);
 		ProjectProposalDto projectProposalDto = (ProjectProposalDto) jdbcTemplate.queryForObject(
 				"SELECT * FROM project_proposals  WHERE student_id=:studentId", param, new ProjectProposalDtoMapper());
-		logger.info(this.getClass() + " " + projectProposalDto);
+		//logger.info(this.getClass() + " " + projectProposalDto);
 		return projectProposalDto;
 	}
 
@@ -91,6 +91,7 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 			projectProposalDto.setLastLongTime(rs.getLong("last_sent_time"));
 			projectProposalDto.setSupervisorComment(rs.getString("supervisor_comment"));
 			projectProposalDto.setRevisons(rs.getInt("revisions"));
+			logger.info("revisions "+ rs.getInt("revisions") );
 			projectProposalDto.setProjectTitle(rs.getString("project_title"));
 			projectProposalDto.setProjectDoingAt(rs.getString("project_doing_at"));
 			projectProposalDto.setProjectFor(rs.getString("project_for"));
@@ -211,7 +212,9 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		params.put("studentId", studentId);
 		
 		int revisions = getProjectProposalRevisions(studentId) ;
+		revisions++;
 		params.put("revisions", revisions);
+		logger.info("New revisions " + revisions);
 		params.put("is_submitted", 0);
 		params.put("supervisor_comment", comment);
 		
@@ -229,7 +232,19 @@ public class ProjectProposalRepositoryImpl implements ProjectProposalRepository 
 		 int revisions = jdbcTemplate.queryForObject(
 				"SELECT revisions FROM project_proposals  WHERE student_id=:studentId", param, Integer.class);
 		logger.info("revisions " + revisions );
-		return 0;
+		return revisions;
+	}
+
+	@Override
+	public boolean confirmProjectProposal(long studentId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("studentId", studentId);
+		params.put("is_confirmed", 1);
+		int rowsAffected = jdbcTemplate.update(
+				"UPDATE project_proposals SET is_confirmed=:is_confirmed WHERE student_id = :studentId",
+				params);
+		logger.info("update rowsAffected " + rowsAffected);
+		return rowsAffected == 0 ? false : true;
 	}
 
 }

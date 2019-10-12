@@ -182,7 +182,21 @@ public class ProjectProposalController {
 
 		return "supervisor/proposal";
 	}
-
+	
+	@RequestMapping(value = "/supervisor/confirm/{studentId}", method = RequestMethod.GET)
+	public String confirmProposal(Model model, HttpServletRequest req, Principal principal,
+			@PathVariable(value = "studentId") String studentIdStr) {
+		 logger.info("Student Id : " + studentIdStr);
+		 long studentId = Long.parseLong(studentIdStr);
+		 boolean isConfirmed = projectProposalService.confirmProjectProposal(studentId);
+	     if(isConfirmed) {
+	    	 model.addAttribute("message", "Project proposal has been confirmed.");
+	     }else {
+	    	 model.addAttribute("message", "Sorry,Project proposal has not been confirmed.");    	 
+	     }
+		 return "supervisor/thanks";
+	}
+	
 	@RequestMapping(value = "/supervisor/return/{studentId}", method = RequestMethod.POST)
 	public String setProposalComment(Model model, HttpServletRequest req, Principal principal,
 			@PathVariable(value = "studentId") String studentIdStr) {

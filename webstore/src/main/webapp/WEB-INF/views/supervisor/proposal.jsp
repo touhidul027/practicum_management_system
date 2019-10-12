@@ -23,13 +23,15 @@
 <body>
 <jsp:include page="header.jsp"></jsp:include>
  <c:url var="urlProposalConfirm" value="/project/proposal/supervisor/confirm/${projectProposalDto.studentId}" />
- <c:url var="urlProposalConfirm" value="/project/proposal/supervisor/confirm/${projectProposalDto.studentId}" />
 
  <div class="container" >
+ <c:if test="${!projectProposalDto.isConfirmed()}" >
  <div class="col-sm-3 text-center" >
    <a class="nav-link"  href="${urlProposalConfirm}">Accept this proposal</a>
    <a class="nav-link"  onclick="showCommentForm();">Return this proposal</a>
-  </div>
+ </div>
+ </c:if>
+ 
  <br>
  <div id="commentForm" class="card" style="display:none;" >
   <c:url var="urlCommentConfirm" value="/project/proposal/supervisor/return/${projectProposalDto.studentId}" />
