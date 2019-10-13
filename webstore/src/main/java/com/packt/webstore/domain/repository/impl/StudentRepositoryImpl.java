@@ -2,25 +2,23 @@ package com.packt.webstore.domain.repository.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
-
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.packt.webstore.domain.Product;
-import com.packt.webstore.domain.Student;
+ import com.packt.webstore.domain.Student;
 import com.packt.webstore.domain.Supervisor;
 import com.packt.webstore.domain.repository.StudentRepository;
 import com.packt.webstore.domain.repository.SupervisorRepository;
 
 @Repository
 public class StudentRepositoryImpl implements StudentRepository {
+	private static final Logger logger = Logger.getLogger(StudentRepositoryImpl.class);
 
 	@Autowired
 	private NamedParameterJdbcTemplate jdbcTemplate;
@@ -41,8 +39,8 @@ public class StudentRepositoryImpl implements StudentRepository {
 	public Student getStudentByEmail(String studentEmail) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("studentEmail", studentEmail);
-		Student student = (Student) jdbcTemplate.queryForObject("SELECT * FROM students WHERE student_email=:studentEmail LIMIT 1",
-				param, new StudentMapper());
+		Student student = (Student) jdbcTemplate.queryForObject(
+				"SELECT * FROM students WHERE student_email=:studentEmail LIMIT 1", param, new StudentMapper());
 		return student;
 	}
 
@@ -93,13 +91,26 @@ public class StudentRepositoryImpl implements StudentRepository {
 	}
 
 	@Override
-	public boolean updateStudent(long studentId,String cellPhone, String password) {
+	public boolean updateStudent(long studentId, String cellPhone, String password) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("studentId", studentId);
 		params.put("cell_phone_number", cellPhone);
 		params.put("password", password);
-		int rowsAffected = jdbcTemplate.update("UPDATE students SET cell_phone_number =:cell_phone_number, password=:password WHERE student_id = :studentId", params);
-		return rowsAffected==0 ? false:true;
+		int rowsAffected = jdbcTemplate.update(
+				"UPDATE students SET cell_phone_number =:cell_phone_number, password=:password WHERE student_id = :studentId",
+				params);
+		return rowsAffected == 0 ? false : true;
+	}
+
+	@Override
+	public List<Student> getStudentsOfASupervisor(long supervisorId) {
+		// fetch supervisor id from the students table
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("supervisorId", supervisorId);
+		List<Student> students = jdbcTemplate.query("select * from students WHERE supervisor_id=:supervisorId", param,
+				new StudentMapper());
+        
+		return students;
 	}
 
 }

@@ -12,4 +12,5 @@ public interface StudentRepository {
 	public boolean registerStudent(int studentId, String studentName, String studentEmail, String department);
 	public Student getStudentByEmail(String userEmail);
 	public boolean updateStudent(long studentId, String cellPhone, String password);
+	public List<Student> getStudentsOfASupervisor(long supervisorId);
 }

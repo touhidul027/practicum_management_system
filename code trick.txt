@@ -1,0 +1,2 @@
+Tab - Type in &nbsp;&nbsp;&nbsp;&nbsp;
+Four spaces - Type in &emsp;

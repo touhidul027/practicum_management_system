@@ -174,5 +174,8 @@ Actor : Student
 
 Actor: Supervisor
 -----------------------------
-1. Supervisor can confirmed project proposal submitted by student
+1. Supervisor can see students list along with details
+2. Supervisor can set weekly meeting time
+3. Supervisor can confirmed project proposal submitted by student
    [for 4.Can submit project proposals to supervisor]
+   

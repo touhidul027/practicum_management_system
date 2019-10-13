@@ -23,17 +23,17 @@
     <ul class="navbar-nav">
 	
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Student List
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Touhidul Islam</a>
-          <a class="dropdown-item" href="#">Anik khan </a>
-          <a class="dropdown-item" href="#">Mahadi Hasan</a>
-        </div>
+      <c:set var="urlStudents" value="/webstore/supervisor/students" />
+         <a class="nav-link" href="${urlStudents}">Students</a> 
       </li>
+      
+      <li class="nav-item dropdown">
+      <c:set var="urlStudents" value="/webstore/supervisor/meeting/times" />
+         <a class="nav-link" href="${urlStudents}">Meeting Time</a> 
+      </li>
+      
 	  <li class="nav-item">
-<c:set var="proposals" value="/webstore/supervisor/proposals" />
+      <c:set var="proposals" value="/webstore/supervisor/proposals" />
         <a class="nav-link" href="${proposals}">Proposals</a>
       </li>
       <li class="nav-item">

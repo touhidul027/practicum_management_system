@@ -13,7 +13,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import com.packt.webstore.domain.Supervisor;
 import com.packt.webstore.domain.repository.SupervisorRepository;
-import com.packt.webstore.service.impl.SupervisorServiceImpl;
 
 public class SupervisorRepositoryImpl implements SupervisorRepository {
 	private static final Logger logger = Logger.getLogger(SupervisorRepositoryImpl.class);

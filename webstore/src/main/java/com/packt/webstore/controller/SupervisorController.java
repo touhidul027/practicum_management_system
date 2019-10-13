@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -32,7 +33,7 @@ public class SupervisorController {
 
 	@Autowired
 	private SupervisorService supervisorService;
-	
+
 	@RequestMapping(value = "/proposals", method = RequestMethod.GET)
 	public String studentsProposals(Model model, Principal principal) {
 		String supervisorUserName = principal.getName();
@@ -51,11 +52,34 @@ public class SupervisorController {
 			Student student = studentService.getStudentById(studentId);
 			studentsMap.put(studentId, student.getUserName());
 		}
-		logger.info("Students Map : " + studentsMap );
+		logger.info("Students Map : " + studentsMap);
 		model.addAttribute("projectProposalsDto", projectProposalsDto);
-		model.addAttribute("studentsMap", studentsMap );
-		
+		model.addAttribute("studentsMap", studentsMap);
+
 		return getFullViewName("proposals");
+	}
+
+	@RequestMapping(value = "/students", method = RequestMethod.GET)
+	public String practicumStudents(Model model, Principal principal) {
+		String supervisorUserName = principal.getName();
+		logger.info("supervisor user name : " + supervisorUserName);
+		Supervisor supervisor = supervisorService.getSupervisorByUserName(supervisorUserName);
+		logger.info("Supervisor " + supervisor);
+		long supervisorId = supervisor.getSupervisorId();
+		// get all the students those are doing internship in his supervision
+		List<Student> students = studentService.getStudentsOfASupervisor(supervisorId);
+		model.addAttribute("students", students);
+		return getFullViewName("students");
+	}
+	
+	@RequestMapping(value = "/student/{id}", method = RequestMethod.GET)
+	public String getStudent(Model model, @PathVariable(value = "id") String studentIdStr) {
+		logger.info("");
+		long studentId = Long.parseLong(studentIdStr);
+		Student student = studentService.getStudentById(studentId) ; 
+		logger.info(student.getStudentId() + student.getUserName());
+		model.addAttribute("student", student);
+		return getFullViewName("student");
 	}
 
 	public String getFullViewName(String viewName) {
