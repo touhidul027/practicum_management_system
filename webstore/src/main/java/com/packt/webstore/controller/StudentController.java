@@ -50,6 +50,15 @@ public class StudentController {
 		return getFullViewName("profile");
 	}
 
+	@RequestMapping(value = "/tasks", method = RequestMethod.GET)
+	public String studentTasks(Model model, Principal principal) {
+		String userEmail = principal.getName();
+		System.out.println(principal.toString());
+		Student student = studentService.getStudentByEmail(userEmail);
+		model.addAttribute("student", student);
+		return getFullViewName("tasks");
+	}
+	
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public String editStudent(Model model, Principal principal) {
 		String userEmail = principal.getName();

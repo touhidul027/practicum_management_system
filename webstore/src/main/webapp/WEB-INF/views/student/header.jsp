@@ -11,6 +11,7 @@
 
 <c:url var="urlGetSupervisor" value="/student/supervisor" />
 <c:url var="urlProjectProposal" value="/student/projectProposal" />
+<c:url var="urlStudentTasks" value="/student/tasks" />
 
 <div class="container" >
  
@@ -30,15 +31,8 @@
           <a  class="nav-link"  href="${urlProjectProposal}">Project Proposal</a>
       </li>
       
-	  <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Log Activities
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <a class="dropdown-item" href="#">Submitted Form</a>
-          <a class="dropdown-item" href="#">Status</a>
-          <a class="dropdown-item" href="#">New Form</a>
-        </div> 
+       <li class="nav-item">
+          <a  class="nav-link"  href="${urlStudentTasks}"> Tasks </a>
       </li>
 	  
 	  <li class="nav-item dropdown">

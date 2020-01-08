@@ -35,10 +35,9 @@
 <!-- add header part  ? which lib iis used-->
 <jsp:include page="header.jsp"></jsp:include>
 
-<div class="container" >
-  <input class="btn btn-link" type="button" value="Add Student" onclick="showRegistrationForm();">
- 
-</div>
+	<div class="container" >
+	  <input class="btn btn-link" type="button" value="Add Student" onclick="showRegistrationForm();">
+	</div>
 
 <div class="container" id="registrationForm" style="display:none;" > 
 <div class="card" style="width: 60rem;">
